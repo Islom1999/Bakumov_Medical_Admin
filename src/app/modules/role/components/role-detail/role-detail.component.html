@@ -1,0 +1,53 @@
+<div class="content-container">
+
+    <ng-container *ngIf="loading else spin">
+        <form nz-form [formGroup]="form" (submit)="submit()">
+            <h2 class="form-title">{{id ? "Update" : "Create"}} Role</h2>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Role name</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+                    <input nz-input placeholder="Role name" formControlName="title" />
+                    <ng-template #userErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('required')">Please input role name</ng-container>
+                        <ng-container *ngIf="control.hasError('duplicated')">The username is redundant!</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+        
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Permisions</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your permision!">
+                    <nz-select 
+                        [nzMaxTagCount]="3" 
+                        [nzMaxTagPlaceholder]="tagPlaceHolder" 
+                        nzMode="multiple"
+                        nzPlaceHolder="Please select" 
+                        [(ngModel)]="listOfSelectedValue"
+                        formControlName="permission"
+                    >
+                        <nz-option *ngFor="let item of permissionsTypes" [nzLabel]="item" [nzValue]="item"></nz-option>
+                    </nz-select>
+                    <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
+                </nz-form-control>
+            </nz-form-item>
+        
+        
+            <nz-form-item>
+                <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                    <button nz-button nzType="primary">{{id ? "Update" : "Create"}}</button>
+                    <button nz-button>
+                        <a routerLink="/role">Back</a>
+                    </button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+    
+    
+</div>
+
+<ng-template #spin>
+    <div class="spinner">
+        <nz-spin nzSimple nzTip="Loading..." [nzSize]="'large'"></nz-spin>
+    </div>
+</ng-template>

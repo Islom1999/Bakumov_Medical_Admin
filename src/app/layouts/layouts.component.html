@@ -1,0 +1,45 @@
+<nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+        <div class="logo"></div>
+        <ul nz-menu nzTheme="dark" nzMode="inline">
+            <li nz-submenu nzTitle="Admins" nzIcon="user">
+                <ul>
+                    <li nz-menu-item routerLink="admin">Admins</li>
+                    <li nz-menu-item routerLink="role">Roles</li>
+                </ul>
+            </li>
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <!-- header -->
+        <ng-container [ngTemplateOutlet]="header"></ng-container>
+
+        <nz-content>
+            <nz-breadcrumb>
+                <nz-breadcrumb-item>User</nz-breadcrumb-item>
+                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+            </nz-breadcrumb>
+            
+            <div class="inner-content">
+                <!-- body -->
+                <router-outlet></router-outlet>
+            </div>
+
+            <!-- footer -->
+            <ng-container [ngTemplateOutlet]="footer"></ng-container>
+        </nz-content>
+    </nz-layout>
+</nz-layout>
+
+<!-- header -->
+<ng-template #header>
+    <nz-header>
+        <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            (click)="isCollapsed = !isCollapsed"></span>
+    </nz-header>
+</ng-template>
+
+<!-- footer -->
+<ng-template #footer>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+</ng-template>
