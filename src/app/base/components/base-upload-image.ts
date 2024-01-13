@@ -7,7 +7,7 @@ import { ImageService } from 'src/app/shared/services/image.service';
 @Component({
   template: '',
 })
-export abstract class BaseImageUpload{
+export abstract class BaseImageUpload {
   loadingImage = true;
   imgNotFound = '/assets/images/no-image.jpg';
   imgUrl = 'Error';
