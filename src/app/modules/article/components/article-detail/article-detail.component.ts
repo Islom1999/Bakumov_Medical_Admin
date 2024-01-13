@@ -14,7 +14,7 @@ import { ImageService } from 'src/app/shared/services/image.service';
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.scss'],
 })
-export class ArticleDetailComponent {
+export class ArticleDetailComponent  {
   roleTypes: RoleType[] = Object.values(RoleType);
   public Editor = ClassicEditor;
 
