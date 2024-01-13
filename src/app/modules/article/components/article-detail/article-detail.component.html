@@ -2,8 +2,6 @@
     <nz-spin class="nz-spin" [nzSpinning]="loading">
         <h2 class="form-title">{{id ? "Update" : "Create"}} Article</h2>
 
-        <!-- <app-image-upload [image]="image" ></app-image-upload> -->
-
         <div class="image-container">
             <nz-spin [nzSpinning]="loadingImage">
                 <div class="image-upload">
@@ -32,7 +30,7 @@
             <nz-form-item>
                 <nz-form-label [nzSpan]="7" nzRequired>Title</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
-                    <input nz-input placeholder="Role name" formControlName="title" />
+                    <input nz-input placeholder="Title" formControlName="title" />
                 </nz-form-control>
             </nz-form-item>
 

@@ -19,6 +19,10 @@ const routes: Routes = [
         path: 'article',
         loadChildren: () => import('../modules/index').then((modules) => modules.ArticleModule)
       },
+      {
+        path: 'noticeable',
+        loadChildren: () => import('../modules/index').then((modules) => modules.NoticeableModule)
+      },
     ]
   }
 ];

@@ -15,9 +15,7 @@ export abstract class BaseComponentList<T> implements OnInit {
     protected nzMessageService: NzMessageService
   ){}
 
-  ngOnInit() {
-    // this.data$ = this.baseSrv._data 
-  }
+  ngOnInit() {}
 
   delete(id: string | undefined): void {
     if(!id) return

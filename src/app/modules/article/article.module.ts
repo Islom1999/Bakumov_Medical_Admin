@@ -9,7 +9,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { UploadImageDirective } from 'src/app/shared/directives/ng-image-upload.directive';
-import { ImageUploadComponent } from 'src/app/shared/components';
 
 
 const router: Routes =  [
@@ -40,7 +39,6 @@ const router: Routes =  [
     UploadImageDirective,
     
     NzModalModule,
-    ImageUploadComponent
   ]
 })
 export class ArticleModule { }

@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ImageService } from 'src/app/shared/services/image.service';
+import { BaseImageUpload } from 'src/app/base/components/base-upload-image';
 
 
 @Component({
@@ -14,32 +15,25 @@ import { ImageService } from 'src/app/shared/services/image.service';
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.scss'],
 })
-export class ArticleDetailComponent {
+export class ArticleDetailComponent extends BaseImageUpload {
   roleTypes: RoleType[] = Object.values(RoleType);
   public Editor = ClassicEditor;
-
   loading = true;
-  disableBtn = true;
-  
   form: FormGroup = new FormGroup({});
   
   get id() {
     return this.route.snapshot.params['id'];
   }
   
-  // image variables
-  loadingImage = true;
-  imgNotFound = '/assets/images/no-image.jpg'
-  imgUrl = 'Error'
-  image!:string 
-
   constructor(
     private _articleSrv: ArticleService,
     private nzMessageService: NzMessageService,
     private router: Router,
     private route: ActivatedRoute,
-    private imageSrv: ImageService
-  ) {}
+    imageSrv: ImageService
+  ) {
+    super(imageSrv)
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -115,37 +109,4 @@ export class ArticleDetailComponent {
         this.router.navigate(['/', 'article']);
       });
   }
-
-  // Image loading
-
-  openUpload(fileInput: HTMLInputElement){
-    fileInput.click()
-  }
-
-  uploadImage(event: File){
-    this.loadingImage = true;
-    this.imageSrv.uploadImage(event)
-      .pipe(
-        tap((image) => {
-          this.imgUrl = image.url
-          this.image = image.filename
-          this.loadingImage = false;
-          this.disableBtn = false;
-        }) 
-      )
-      .subscribe()
-  }
-
-  removeImage(){
-      this.loadingImage = true;
-      this.imgUrl = 'Error'
-      this.image = ''
-      this.loadingImage = false
-      this.disableBtn = true;
-  }
-
-  getImageUrl(url: string): string{
-    return this.imageSrv.getImageUrl(url)
-  }
-
 }
