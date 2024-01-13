@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { shareReplay, tap } from 'rxjs/operators';
 import { IPagination } from 'src/interfaces';
 
 @Injectable({
@@ -50,7 +50,7 @@ export abstract class BaseApiService<T> {
     return this.http.patch<T>(`${this.apiUrl}/${id}`, data).pipe(
       tap(() => {
         this.loadAll()
-      })
+      }),
     );
   }
 
@@ -58,7 +58,7 @@ export abstract class BaseApiService<T> {
     return this.http.delete<T>(`${this.apiUrl}/${id}`).pipe(
       tap(() => {
         this.loadAll()
-      })
+      }),
     );
   }
 }

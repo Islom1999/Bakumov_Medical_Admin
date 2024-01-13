@@ -10,6 +10,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 @NgModule({
     imports: [
@@ -26,6 +28,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
         NzSelectModule,
         NzSpinModule,
         NzDropDownModule,
+        NzInputNumberModule,
+        NzImageModule
     ],
     exports: [
         FormsModule,
@@ -41,6 +45,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
         NzSelectModule,
         NzSpinModule,
         NzDropDownModule,
+        NzInputNumberModule,
+        NzImageModule
 
     ]
 })

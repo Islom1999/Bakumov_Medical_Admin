@@ -3,29 +3,27 @@ import { RoleService } from '../../service/role.service';
 import { IRole } from 'src/interfaces';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, filter, of, switchMap } from 'rxjs';
-import { BaseList } from 'src/app/base/components/base-list';
+import { BaseComponentList } from 'src/app/base/components/base-list';
 
 @Component({
   selector: 'app-role-list',
   templateUrl: './role-list.component.html',
   styleUrls: ['./role-list.component.scss'],
 })
-export class RoleListComponent extends BaseList<IRole> {
+export class RoleListComponent extends BaseComponentList<IRole> {
   roles$: Observable<IRole[]> = of([]);
   
   // Serch variables
-  rolesFilter$: Observable<IRole[]> = of([]); 
   searchValue = '';
   visible = false;
 
-  constructor(baseSrv: RoleService, nzMessageService: NzMessageService) {
-    super(baseSrv, nzMessageService);
+  constructor(_roleSrv: RoleService, _messageSrv: NzMessageService) {
+    super(_roleSrv, _messageSrv);
   }
 
   override ngOnInit(): void {
     super.ngOnInit();
     this.roles$ = this.data$;
-    this.rolesFilter$ = this.data$;
   }
 
   // Search reset function

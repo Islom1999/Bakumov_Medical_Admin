@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Permission } from 'src/enumerations';
-import { RoleService } from '../../service/role.service';
+import { Component } from '@angular/core';
+import { Observable, catchError, of } from 'rxjs';
+import { AdminService } from '../../service/admin.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Permission } from 'src/enumerations';
+import { IRole } from 'src/interfaces';
+import { RoleService } from 'src/app/modules/role/service/role.service';
 
 @Component({
-  selector: 'app-role-detail',
-  templateUrl: './role-detail.component.html',
-  styleUrls: ['./role-detail.component.scss'],
+  selector: 'app-admin-detail',
+  templateUrl: './admin-detail.component.html',
+  styleUrls: ['./admin-detail.component.scss']
 })
-export class RoleDetailComponent implements OnInit {
-  permissionsTypes: Permission[] = Object.values(Permission);
-  listOfSelectedValue = [];
+export class AdminDetailComponent {
+  roles!:IRole[]
   loading = true;
   disableBtn = true;
 
@@ -25,6 +26,7 @@ export class RoleDetailComponent implements OnInit {
 
   constructor(
     private _roleSrv: RoleService,
+    private _adminSrv: AdminService,
     private nzMessageService: NzMessageService,
     private router: Router,
     private route: ActivatedRoute,
@@ -32,11 +34,15 @@ export class RoleDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      permission: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.minLength(6)]),
+      phone: new FormControl('', [Validators.required]),
+      adminRoleId: new FormControl('', [Validators.required]),
     }); 
+
     if(this.id){
-      this._roleSrv.getById(this.id).subscribe((role) => {
+      this._adminSrv.getById(this.id).subscribe((role) => {
         this.form.patchValue(role);
         this.disableBtn = false
         this.loading = false
@@ -45,6 +51,9 @@ export class RoleDetailComponent implements OnInit {
       this.loading = false
       this.disableBtn = false
     }   
+    this._roleSrv._data.subscribe((role) => {
+      this.roles = role;
+    })
   }
 
   submit(){
@@ -67,7 +76,7 @@ export class RoleDetailComponent implements OnInit {
   }
 
   create(){
-    this._roleSrv.create(this.form.value)
+    this._adminSrv.create(this.form.value)
     .pipe(
       catchError( ({error}) => {
         if(error?.statusCode == 409)
@@ -78,12 +87,12 @@ export class RoleDetailComponent implements OnInit {
     )
     .subscribe(() => {
       this.nzMessageService.success('Create data')
-      this.router.navigate(['/', 'role'])
+      this.router.navigate(['/', 'admin'])
     })
   }
 
   update(id:string){
-    this._roleSrv.update(id, this.form.value)
+    this._adminSrv.update(id, this.form.value)
     .pipe(
       catchError( ({error}) => {
         if(error?.statusCode == 409)
@@ -94,10 +103,7 @@ export class RoleDetailComponent implements OnInit {
     )
     .subscribe(() => {
       this.nzMessageService.success('Update data')
-      this.router.navigate(['/', 'role'])
+      this.router.navigate(['/', 'admin'])
     })
   }
-
-  
-
 }

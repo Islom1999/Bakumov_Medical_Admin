@@ -8,7 +8,7 @@ import { BaseApiService } from '../services/base-api.service';
 @Component({
   template:''
 })
-export abstract class BaseList<T> implements OnInit {
+export abstract class BaseComponentList<T> implements OnInit {
   data$: Observable<T[]> = this.baseSrv._data
   constructor(
     protected baseSrv: BaseApiService<T>,

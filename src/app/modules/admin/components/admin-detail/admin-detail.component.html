@@ -1,0 +1,63 @@
+<div class="content-container">
+    <nz-spin [nzSpinning]="loading">
+        <form nz-form [formGroup]="form" (submit)="submit()">
+            <h2 class="form-title">{{id ? "Update" : "Create"}} Admin</h2>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Fullname</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..."
+                    nzErrorTip="Please input">
+                    <input nz-input placeholder="Fullname" formControlName="name" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Email</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..."
+                    nzErrorTip="Please input">
+                    <input type="email" nz-input placeholder="Email" formControlName="email" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Phone</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..."
+                nzErrorTip="Please input">
+                    <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                        <ng-template #addOnBeforeTemplate>
+                            <span>+998</span>
+                        </ng-template>
+
+                        <input type="number" formControlName="phone" id="'phoneNumber'" nz-input placeholder="972446972"/>
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Admin role</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
+                    <nz-select [nzMaxTagCount]="3" nzPlaceHolder="Admin role"
+                        formControlName="adminRoleId">
+                        <nz-option *ngFor="let item of roles " [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7">Password</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..."
+                    nzErrorTip="Please input">
+                    <input type="password" nz-input placeholder="Password" formControlName="password" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                    <button nz-button nzType="primary" [disabled]="disableBtn">{{id ? "Update" : "Create"}}</button>
+                    <button nz-button>
+                        <a routerLink="/admin">Back</a>
+                    </button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </nz-spin>
+</div>
