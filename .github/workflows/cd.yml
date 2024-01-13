@@ -23,10 +23,9 @@ jobs:
         username: ${{ env.SERVER_USERNAME }}
         key: ${{ env.SSH_PRIVATE_KEY }}
         script: |
-          cd ~/back_spare_parts/
+          cd ~/Bakumov_Medical_Admin/
           git pull
           npm install
-          npx prisma migrate dev
-          npx prisma generate
-          npm run build
-          pm2 restart back-spare
+          ng build
+          sudo mv /root/Bakumov_Medical_Admin/dist/bakumov-medical-admin /var/www/bakumov-medical-admin
+          
