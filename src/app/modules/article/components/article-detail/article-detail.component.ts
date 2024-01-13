@@ -78,7 +78,7 @@ export class ArticleDetailComponent extends BaseImageUpload {
 
   create() {
     this._articleSrv
-      .create(this.form.value)
+      .create({...this.form.value, image: this.image})
       .pipe(
         catchError(({ error }) => {
           if (error?.statusCode == 409)

@@ -4,6 +4,7 @@ import { NoticeableListComponent } from './components/noticeable-list/noticeable
 import { NoticeableDetailComponent } from './components/noticeable-detail/noticeable-detail.component';
 import { BaseModule } from 'src/app/shared/modules';
 import { RouterModule, Routes } from '@angular/router';
+import { UploadImageDirective } from 'src/app/shared/directives/ng-image-upload.directive';
 
 const router: Routes =  [
   {
@@ -30,6 +31,8 @@ const router: Routes =  [
     CommonModule,
     BaseModule,
     RouterModule.forChild(router),
+
+    UploadImageDirective
   ]
 })
 export class NoticeableModule { }
