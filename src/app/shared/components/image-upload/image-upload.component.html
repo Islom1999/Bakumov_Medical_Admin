@@ -1,0 +1,19 @@
+<div class="image-container">
+    <nz-spin [nzSpinning]="loadingImage">
+        <div class="image-upload">
+            <button nz-button class="remove-image" (click)="removeImage()">
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+            <img nz-image class="image-preview" [nzFallback]="imgNotFound" [nzSrc]="imgUrl" />
+
+            <div class="upload-file">
+                <input type="file" NgUploadImage (imageUploaded)="uploadImage($event)" #image_file
+                    style="display: none;" accept=".png, .jpg, .jpeg">
+
+                <button nz-button (click)="openUpload(image_file)">
+                    <span nz-icon nzType="upload"></span>
+                </button>
+            </div>
+        </div>
+    </nz-spin>
+</div>

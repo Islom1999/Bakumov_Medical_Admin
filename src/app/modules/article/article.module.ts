@@ -6,10 +6,10 @@ import { BaseModule } from 'src/app/shared/modules';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { UploadImageDirective } from 'src/app/shared/directives/ng-image-upload.directive';
+import { ImageUploadComponent } from 'src/app/shared/components';
 
 
 const router: Routes =  [
@@ -30,7 +30,7 @@ const router: Routes =  [
 @NgModule({
   declarations: [
     ArticleListComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +39,8 @@ const router: Routes =  [
     CKEditorModule,
     UploadImageDirective,
     
-    NzModalModule
+    NzModalModule,
+    ImageUploadComponent
   ]
 })
 export class ArticleModule { }

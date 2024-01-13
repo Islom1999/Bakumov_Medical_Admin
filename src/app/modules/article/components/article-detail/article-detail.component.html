@@ -2,6 +2,7 @@
     <nz-spin class="nz-spin" [nzSpinning]="loading">
         <h2 class="form-title">{{id ? "Update" : "Create"}} Article</h2>
 
+        <!-- <app-image-upload [image]="image" ></app-image-upload> -->
 
         <div class="image-container">
             <nz-spin [nzSpinning]="loadingImage">
@@ -26,7 +27,6 @@
                 </div>
             </nz-spin>
         </div>
-
 
         <form nz-form [formGroup]="form" (submit)="submit()">
             <nz-form-item>

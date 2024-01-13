@@ -14,7 +14,7 @@ import { ImageService } from 'src/app/shared/services/image.service';
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.scss'],
 })
-export class ArticleDetailComponent  {
+export class ArticleDetailComponent {
   roleTypes: RoleType[] = Object.values(RoleType);
   public Editor = ClassicEditor;
 
@@ -54,6 +54,7 @@ export class ArticleDetailComponent  {
         this.disableBtn = false;
         this.loading = false
         this.imgUrl = this.getImageUrl(item.image)
+        this.image = item.image
         this.loadingImage = false
       });
     } else {
@@ -83,7 +84,7 @@ export class ArticleDetailComponent  {
 
   create() {
     this._articleSrv
-      .create({...this.form.value, image: this.image})
+      .create(this.form.value)
       .pipe(
         catchError(({ error }) => {
           if (error?.statusCode == 409)
