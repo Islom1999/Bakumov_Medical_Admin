@@ -1,66 +1,56 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RoleType } from 'src/enumerations/roleType';
-import { ArticleService } from '../../service/article.service';
+import { NamesService } from '../../service/names.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of, tap } from 'rxjs';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ImageService } from 'src/app/shared/services/image.service';
-import { BaseImageUpload } from 'src/app/base/components/base-upload-image';
-
+import { catchError, of } from 'rxjs';
+import { Gender } from 'src/enumerations';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
-  selector: 'app-article-detail',
-  templateUrl: './article-detail.component.html',
-  styleUrls: ['./article-detail.component.scss'],
+  selector: 'app-names-detail',
+  templateUrl: './names-detail.component.html',
+  styleUrls: ['./names-detail.component.scss'],
 })
-export class ArticleDetailComponent extends BaseImageUpload {
+export class NamesDetailComponent {
   public Editor = ClassicEditor;
-  roleTypes: RoleType[] = Object.values(RoleType);
   loading = true;
-  form: FormGroup = new FormGroup({});
+  gender: Gender[] = Object.values(Gender);
   
+  form: FormGroup = new FormGroup({});
+
   get id() {
     return this.route.snapshot.params['id'];
   }
-  
+
   constructor(
-    private _articleSrv: ArticleService,
+    private _nameSrv: NamesService,
     private nzMessageService: NzMessageService,
     private router: Router,
     private route: ActivatedRoute,
     imageSrv: ImageService
-  ) {
-    super(imageSrv)
-  }
+  ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      descr: new FormControl('', [Validators.required]),
-      roleType: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      explanation: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
     });
 
     if (this.id) {
-      this._articleSrv.getById(this.id).subscribe((item) => {
+      this._nameSrv.getById(this.id).subscribe((item) => {
         this.form.patchValue(item);
-        this.disableBtn = false;
-        this.loading = false
-        this.imgUrl = this.getImageUrl(item.image)
-        this.image = item.image
-        this.loadingImage = false
+        this.loading = false;
       });
     } else {
-      this.loading = false
-      this.loadingImage = false;
-      this.disableBtn = true;
+      this.loading = false;
     }
   }
 
   submit() {
     if (this.form.valid) {
-      this.disableBtn = true;
       if (this.id) {
         this.update(this.id);
       } else {
@@ -77,36 +67,34 @@ export class ArticleDetailComponent extends BaseImageUpload {
   }
 
   create() {
-    this._articleSrv
-      .create({...this.form.value, image: this.image})
+    this._nameSrv
+      .create({ ...this.form.value })
       .pipe(
         catchError(({ error }) => {
           if (error?.statusCode == 409)
             this.nzMessageService.error(error?.message);
-          this.disableBtn = false;
           return of();
         })
       )
       .subscribe(() => {
         this.nzMessageService.success('Create data');
-        this.router.navigate(['/', 'article']);
+        this.router.navigate(['/', 'names']);
       });
   }
 
   update(id: string) {
-    this._articleSrv
-      .update(id, {...this.form.value, image: this.image})
+    this._nameSrv
+      .update(id, { ...this.form.value })
       .pipe(
         catchError(({ error }) => {
           if (error?.statusCode == 409)
             this.nzMessageService.error(error?.message);
-          this.disableBtn = false;
           return of();
         })
       )
       .subscribe(() => {
         this.nzMessageService.success('Update data');
-        this.router.navigate(['/', 'article']);
+        this.router.navigate(['/', 'names']);
       });
   }
 }

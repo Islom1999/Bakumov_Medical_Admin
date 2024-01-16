@@ -1,0 +1,62 @@
+<div class="content-container">
+    <nz-spin class="nz-spin" [nzSpinning]="loading">
+        <h2 class="form-title">{{id ? "Update" : "Create"}} Vosita</h2>
+
+        <div class="image-container">
+            <nz-spin [nzSpinning]="loadingImage">
+                <div class="image-upload">
+                    <button nz-button class="remove-image" (click)="removeImage()">
+                        <span nz-icon nzType="delete" nzTheme="outline"></span>
+                    </button>
+                    <img nz-image class="image-preview" [nzFallback]="imgNotFound" [nzSrc]="imgUrl" />
+
+                    <div class="upload-file">
+                        <input type="file" NgUploadImage (imageUploaded)="uploadImage($event)" #image_file
+                            style="display: none;" accept=".png, .jpg, .jpeg">
+
+                        <button nz-button (click)="openUpload(image_file)">
+                            <span nz-icon nzType="upload"></span>
+                        </button>
+                    </div>
+                </div>
+            </nz-spin>
+        </div>
+
+        <form nz-form [formGroup]="form" (submit)="submit()">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Nomi</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
+                    <input nz-input placeholder="Title" formControlName="name" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Vosita turi</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
+                    <nz-select nzPlaceHolder="Please select" formControlName="toolsType">
+                        <nz-option *ngFor="let item of toolsType" [nzLabel]="item"
+                            [nzValue]="item"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Role turi</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
+                    <nz-select nzPlaceHolder="Please select" formControlName="roleType">
+                        <nz-option *ngFor="let item of roleType" [nzLabel]="item" [nzValue]="item"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                    <button nz-button nzType="primary" [disabled]="disableBtn">{{id ? "Update" : "Create"}}</button>
+                    <button nz-button>
+                        <a routerLink="/tools">Back</a>
+                    </button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </nz-spin>
+</div>

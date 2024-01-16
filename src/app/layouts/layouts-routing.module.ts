@@ -23,6 +23,18 @@ const routes: Routes = [
         path: 'noticeable',
         loadChildren: () => import('../modules/index').then((modules) => modules.NoticeableModule)
       },
+      {
+        path: 'noticeable-item',
+        loadChildren: () => import('../modules/index').then((modules) => modules.NoticeableItemModule)
+      },
+      {
+        path: 'tools',
+        loadChildren: () => import('../modules/index').then((modules) => modules.ToolsModule)
+      },
+      {
+        path: 'names',
+        loadChildren: () => import('../modules/index').then((modules) => modules.NamesModule)
+      },
     ]
   }
 ];

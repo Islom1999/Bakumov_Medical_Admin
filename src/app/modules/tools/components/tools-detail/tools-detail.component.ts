@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RoleType } from 'src/enumerations/roleType';
-import { ArticleService } from '../../service/article.service';
+import { BaseImageUpload } from 'src/app/base/components/base-upload-image';
+import { ToolsService } from '../../service/tools.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of, tap } from 'rxjs';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ImageService } from 'src/app/shared/services/image.service';
-import { BaseImageUpload } from 'src/app/base/components/base-upload-image';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ITools } from 'src/interfaces';
+import { Observable, catchError, of } from 'rxjs';
+import { ToolsType } from 'src/enumerations/toolsType';
+import { RoleType } from 'src/enumerations';
 
 @Component({
-  selector: 'app-article-detail',
-  templateUrl: './article-detail.component.html',
-  styleUrls: ['./article-detail.component.scss'],
+  selector: 'app-tools-detail',
+  templateUrl: './tools-detail.component.html',
+  styleUrls: ['./tools-detail.component.scss']
 })
-export class ArticleDetailComponent extends BaseImageUpload {
-  public Editor = ClassicEditor;
-  roleTypes: RoleType[] = Object.values(RoleType);
+export class ToolsDetailComponent extends BaseImageUpload {
+  toolsType: ToolsType[] = Object.values(ToolsType);
+  roleType: RoleType[] = Object.values(RoleType);
+  noticeable: Observable<ITools[]> = of([]);
   loading = true;
   form: FormGroup = new FormGroup({});
   
@@ -26,7 +27,7 @@ export class ArticleDetailComponent extends BaseImageUpload {
   }
   
   constructor(
-    private _articleSrv: ArticleService,
+    private _toolsSrv: ToolsService,
     private nzMessageService: NzMessageService,
     private router: Router,
     private route: ActivatedRoute,
@@ -37,18 +38,18 @@ export class ArticleDetailComponent extends BaseImageUpload {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      descr: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required]),
+      toolsType: new FormControl('', [Validators.required]),
       roleType: new FormControl('', [Validators.required]),
     });
 
     if (this.id) {
-      this._articleSrv.getById(this.id).subscribe((item) => {
+      this._toolsSrv.getById(this.id).subscribe((item) => {
         this.form.patchValue(item);
         this.disableBtn = false;
         this.loading = false
-        this.imgUrl = this.getImageUrl(item.image)
-        this.image = item.image
+        this.imgUrl = this.getImageUrl(item.icon)
+        this.image = item.icon
         this.loadingImage = false
       });
     } else {
@@ -77,8 +78,8 @@ export class ArticleDetailComponent extends BaseImageUpload {
   }
 
   create() {
-    this._articleSrv
-      .create({...this.form.value, image: this.image})
+    this._toolsSrv
+      .create({...this.form.value, icon: this.image})
       .pipe(
         catchError(({ error }) => {
           if (error?.statusCode == 409)
@@ -89,13 +90,13 @@ export class ArticleDetailComponent extends BaseImageUpload {
       )
       .subscribe(() => {
         this.nzMessageService.success('Create data');
-        this.router.navigate(['/', 'article']);
+        this.router.navigate(['/', 'tools']);
       });
   }
 
   update(id: string) {
-    this._articleSrv
-      .update(id, {...this.form.value, image: this.image})
+    this._toolsSrv
+      .update(id, {...this.form.value, icon: this.image})
       .pipe(
         catchError(({ error }) => {
           if (error?.statusCode == 409)
@@ -106,7 +107,7 @@ export class ArticleDetailComponent extends BaseImageUpload {
       )
       .subscribe(() => {
         this.nzMessageService.success('Update data');
-        this.router.navigate(['/', 'article']);
+        this.router.navigate(['/', 'tools']);
       });
   }
 }

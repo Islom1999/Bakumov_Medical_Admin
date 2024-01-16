@@ -3,7 +3,7 @@ import { BaseComponentList } from 'src/app/base/components/base-list';
 import { IArticle } from 'src/interfaces';
 import { ArticleService } from '../../service/article.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-article-list',
@@ -26,7 +26,11 @@ export class ArticleListComponent extends BaseComponentList<IArticle> implements
 
   override ngOnInit(): void {
     super.ngOnInit();
-    this.articles$ = this.data$;
+    this.articles$ = this.data$.pipe(
+      tap(() => {
+        this.loading = false
+      }) 
+    )
   }
 
   // Search reset function

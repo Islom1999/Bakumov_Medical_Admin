@@ -1,23 +1,25 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RoleType } from 'src/enumerations/roleType';
-import { ArticleService } from '../../service/article.service';
+import { Observable, catchError, of, tap } from 'rxjs';
+import { BaseImageUpload } from 'src/app/base/components/base-upload-image';
+import { NoticeableItemService } from '../../service/noticeable-item.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of, tap } from 'rxjs';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ImageService } from 'src/app/shared/services/image.service';
-import { BaseImageUpload } from 'src/app/base/components/base-upload-image';
-
+import { NoticeableService } from 'src/app/modules/noticeable/service/noticeable.service';
+import { INoticeable } from 'src/interfaces';
+import { Trim } from 'src/enumerations';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
-  selector: 'app-article-detail',
-  templateUrl: './article-detail.component.html',
-  styleUrls: ['./article-detail.component.scss'],
+  selector: 'app-noticeable-item-detail',
+  templateUrl: './noticeable-item-detail.component.html',
+  styleUrls: ['./noticeable-item-detail.component.scss']
 })
-export class ArticleDetailComponent extends BaseImageUpload {
+export class NoticeableItemDetailComponent extends BaseImageUpload {
   public Editor = ClassicEditor;
-  roleTypes: RoleType[] = Object.values(RoleType);
+  trim: Trim[] = Object.values(Trim);
+  noticeable: Observable<INoticeable[]> = of([]);
   loading = true;
   form: FormGroup = new FormGroup({});
   
@@ -26,7 +28,8 @@ export class ArticleDetailComponent extends BaseImageUpload {
   }
   
   constructor(
-    private _articleSrv: ArticleService,
+    private _noticeableItemSrv: NoticeableItemService,
+    private _noticeableSrv: NoticeableService,
     private nzMessageService: NzMessageService,
     private router: Router,
     private route: ActivatedRoute,
@@ -39,11 +42,12 @@ export class ArticleDetailComponent extends BaseImageUpload {
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),
       descr: new FormControl('', [Validators.required]),
-      roleType: new FormControl('', [Validators.required]),
+      trim: new FormControl('', [Validators.required]),
+      noticeableId: new FormControl('', [Validators.required]),
     });
 
     if (this.id) {
-      this._articleSrv.getById(this.id).subscribe((item) => {
+      this._noticeableItemSrv.getById(this.id).subscribe((item) => {
         this.form.patchValue(item);
         this.disableBtn = false;
         this.loading = false
@@ -56,6 +60,8 @@ export class ArticleDetailComponent extends BaseImageUpload {
       this.loadingImage = false;
       this.disableBtn = true;
     }
+
+    this.noticeable = this._noticeableSrv.getAll()
   }
 
   submit() {
@@ -77,7 +83,7 @@ export class ArticleDetailComponent extends BaseImageUpload {
   }
 
   create() {
-    this._articleSrv
+    this._noticeableItemSrv
       .create({...this.form.value, image: this.image})
       .pipe(
         catchError(({ error }) => {
@@ -89,12 +95,12 @@ export class ArticleDetailComponent extends BaseImageUpload {
       )
       .subscribe(() => {
         this.nzMessageService.success('Create data');
-        this.router.navigate(['/', 'article']);
+        this.router.navigate(['/', 'noticeable-item']);
       });
   }
 
   update(id: string) {
-    this._articleSrv
+    this._noticeableItemSrv
       .update(id, {...this.form.value, image: this.image})
       .pipe(
         catchError(({ error }) => {
@@ -106,7 +112,7 @@ export class ArticleDetailComponent extends BaseImageUpload {
       )
       .subscribe(() => {
         this.nzMessageService.success('Update data');
-        this.router.navigate(['/', 'article']);
+        this.router.navigate(['/', 'noticeable-item']);
       });
   }
 }

@@ -1,44 +1,39 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArticleListComponent } from './components/article-list/article-list.component';
-import { ArticleDetailComponent } from './components/article-detail/article-detail.component';
+import { NamesListComponent } from './components/names-list/names-list.component';
+import { NamesDetailComponent } from './components/names-detail/names-detail.component';
 import { BaseModule } from 'src/app/shared/modules';
 import { RouterModule, Routes } from '@angular/router';
-
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { UploadImageDirective } from 'src/app/shared/directives/ng-image-upload.directive';
-
 
 const router: Routes =  [
   {
     path: '',
-    component: ArticleListComponent
+    component: NamesListComponent
   },
   {
     path: 'add',
-    component: ArticleDetailComponent
+    component: NamesDetailComponent
   },
   {
     path: 'update/:id',
-    component: ArticleDetailComponent
+    component: NamesDetailComponent
   }
 ] 
 
 @NgModule({
   declarations: [
-    ArticleListComponent,
-    ArticleDetailComponent,
+    NamesListComponent,
+    NamesDetailComponent
   ],
   imports: [
     CommonModule,
     BaseModule,
     RouterModule.forChild(router),
-    UploadImageDirective,
-    
+
     CKEditorModule,
     NzModalModule,
   ]
 })
-export class ArticleModule { }
+export class NamesModule { }

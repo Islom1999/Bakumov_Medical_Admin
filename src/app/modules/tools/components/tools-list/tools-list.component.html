@@ -1,7 +1,11 @@
 
 <div class="table-top">
     <div class="left">
-        <h2>Maqolalar ro'yhati</h2>
+        <h2>Vositalar ro'yhati</h2>
+        <!-- <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a parent" [(ngModel)]="toolsParam" 
+        (ngModelChange)="filterParent($event)">
+            <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of toolsType"></nz-option>
+        </nz-select> -->
     </div>
     <div class="right">
         <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
@@ -10,31 +14,29 @@
     </div>
 </div>
 
-<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(articles$ | async) ?? []" [nzLoading]="loading">
+<nz-table #basicTable [nzData]="(tools$ | async) ?? []" [nzLoading]="(tools$ | async) ? false : true">
     <thead>
         <tr>
-            <th nzWidth="50px">No</th>
-            <th nzWidth="30%" nzCustomFilter>
-                Nomi
+            <th>No</th>
+            <th nzCustomFilter>
+                Name
                 <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-                    <button nz-button nzSize="large" >
+                    <button nz-button nzSize="large">
                         <span nz-icon nzType="search" style="color: blue;"></span>
                     </button>
                 </nz-filter-trigger>
             </th>
-            <th nzWidth="150px">Xizmat turi</th>
-            <th nzWidth="150px">Role turi</th>
-            <th nzWidth="40%" nzEllipsis>Maqolalar</th>
-            <th nzWidth="200px">Boshqaruv</th>
+            <th>Role turi</th>
+            <th>Xizmat turi</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of fixedTable.data; index as i">
-            <td nzEllipsis>{{ i+1 }}</td>
-            <td>{{ data.title }}</td>
-            <td>{{ data.serviceType }}</td>
+        <tr *ngFor="let data of basicTable.data; index as i">
+            <td>{{ i+1 }}</td>
+            <td>{{ data.name }}</td>
             <td>{{ data.roleType }}</td>
-            <td nzEllipsis>{{ data.descr }}</td>
+            <td>{{ data.toolsType }}</td>
             <td>
                 <nz-button-group>
                     <button nzType="default" nz-button nzSize="large" nz-popconfirm

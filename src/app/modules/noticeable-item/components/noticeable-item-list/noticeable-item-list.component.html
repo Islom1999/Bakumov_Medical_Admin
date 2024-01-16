@@ -1,7 +1,11 @@
+<h2>Noticeable - (Muhimlar)</h2>
 
 <div class="table-top">
     <div class="left">
-        <h2>Maqolalar ro'yhati</h2>
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a parent" [(ngModel)]="noticeableId" 
+        (ngModelChange)="filterParent($event)">
+            <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of noticeable | async"></nz-option>
+        </nz-select>
     </div>
     <div class="right">
         <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
@@ -10,7 +14,7 @@
     </div>
 </div>
 
-<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(articles$ | async) ?? []" [nzLoading]="loading">
+<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(noticeableItem$ | async) ?? []" [nzLoading]="loading">
     <thead>
         <tr>
             <th nzWidth="50px">No</th>
@@ -22,9 +26,8 @@
                     </button>
                 </nz-filter-trigger>
             </th>
-            <th nzWidth="150px">Xizmat turi</th>
-            <th nzWidth="150px">Role turi</th>
-            <th nzWidth="40%" nzEllipsis>Maqolalar</th>
+            <th nzWidth="150px">Trim</th>
+            <th nzWidth="40%" nzEllipsis>Malumotlar</th>
             <th nzWidth="200px">Boshqaruv</th>
         </tr>
     </thead>
@@ -32,8 +35,7 @@
         <tr *ngFor="let data of fixedTable.data; index as i">
             <td nzEllipsis>{{ i+1 }}</td>
             <td>{{ data.title }}</td>
-            <td>{{ data.serviceType }}</td>
-            <td>{{ data.roleType }}</td>
+            <td>{{ data.trim }}</td>
             <td nzEllipsis>{{ data.descr }}</td>
             <td>
                 <nz-button-group>

@@ -21,7 +21,6 @@ const router: Routes =  [
   }
 ] 
 
-
 @NgModule({
   declarations: [
     NoticeableListComponent,

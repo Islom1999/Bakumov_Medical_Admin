@@ -2,14 +2,16 @@
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Component, Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { BaseApiService } from '../services/base-api.service';
 
 @Component({
   template:''
 })
 export abstract class BaseComponentList<T> implements OnInit {
-  data$: Observable<T[]> = this.baseSrv._data
+  loading = true
+  data$: Observable<T[]> = this.baseSrv._data.pipe()
+
   constructor(
     protected baseSrv: BaseApiService<T>,
     protected nzMessageService: NzMessageService

@@ -1,0 +1,45 @@
+[nz-form] {
+  min-width: 100%;
+}
+.nz-spin {
+  min-width: 60%;
+}
+
+.form-title {
+  text-align: center;
+  margin: 30px 0px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.image-upload {
+  display: inline-block;
+  border: 2px solid blue;
+  position: relative;
+
+  .image-preview {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  .upload-file {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    span {
+      color: blue;
+    }
+  }
+  .remove-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    span {
+      color: red;
+    }
+  }
+}
