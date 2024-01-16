@@ -1,0 +1,64 @@
+<h2>Noticeable - (Muhimlar)</h2>
+
+<div class="table-top">
+    <div class="left">
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a parent" [(ngModel)]="possibleId" 
+        (ngModelChange)="filterParent($event)">
+            <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of possible | async"></nz-option>
+        </nz-select>
+    </div>
+    <div class="right">
+        <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
+            <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        </a>
+    </div>
+</div>
+
+<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(possibleItem$ | async) ?? []" [nzLoading]="loading">
+    <thead>
+        <tr>
+            <th nzWidth="50px">No</th>
+            <th nzWidth="30%" nzCustomFilter>
+                Nomi
+                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                    <button nz-button nzSize="large" >
+                        <span nz-icon nzType="search" style="color: blue;"></span>
+                    </button>
+                </nz-filter-trigger>
+            </th>
+            <th nzWidth="150px">Trim</th>
+            <th nzWidth="40%" nzEllipsis>Malumotlar</th>
+            <th nzWidth="200px">Boshqaruv</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of fixedTable.data; index as i">
+            <td nzEllipsis>{{ i+1 }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.isPossible }}</td>
+            <td nzEllipsis>{{ data.descr }}</td>
+            <td>
+                <nz-button-group>
+                    <button nzType="default" nz-button nzSize="large" nz-popconfirm
+                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="topRight" nz-button
+                        (nzOnConfirm)="delete(data.id)">
+                        <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                    </button>
+                    <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
+                        <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                    </a>
+                </nz-button-group>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

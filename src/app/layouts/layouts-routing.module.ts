@@ -35,6 +35,18 @@ const routes: Routes = [
         path: 'names',
         loadChildren: () => import('../modules/index').then((modules) => modules.NamesModule)
       },
+      {
+        path: 'possible',
+        loadChildren: () => import('../modules/index').then((modules) => modules.PossibleModule)
+      },
+      {
+        path: 'possible-item',
+        loadChildren: () => import('../modules/index').then((modules) => modules.PossibleItemModule)
+      },
+      {
+        path: 'training',
+        loadChildren: () => import('../modules/index').then((modules) => modules.TrainingModule)
+      },
     ]
   }
 ];

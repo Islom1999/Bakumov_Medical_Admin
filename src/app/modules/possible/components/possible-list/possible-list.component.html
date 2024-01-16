@@ -1,0 +1,56 @@
+
+<div class="table-top">
+    <div class="left">
+        <h2>Xavfsizmi list</h2>
+    </div>
+    <div class="right">
+        <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
+            <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        </a>
+    </div>
+</div>
+
+<nz-table #basicTable [nzData]="(possible$ | async) ?? []" [nzLoading]="(possible$ | async) ? false : true">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th nzCustomFilter>
+                Name
+                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                    <button nz-button nzSize="large" >
+                        <span nz-icon nzType="search" style="color: blue;"></span>
+                    </button>
+                </nz-filter-trigger>
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data; index as i">
+            <td>{{ i+1 }}</td>
+            <td>{{ data.name }}</td>
+            <td>
+                <nz-button-group>
+                    <button nzType="default" nz-button nzSize="large" nz-popconfirm
+                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="topRight" nz-button
+                        (nzOnConfirm)="delete(data.id)">
+                        <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                    </button>
+                    <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
+                        <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                    </a>
+                </nz-button-group>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

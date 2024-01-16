@@ -30,8 +30,8 @@ export class NamesListComponent extends BaseComponentList<IName> implements OnIn
 
   override ngOnInit(): void {
     super.ngOnInit();
-    let params = new HttpParams().set('gender', this.genderValue);
-    this.names$ = this._nameSrv.getAll(params).pipe(
+    // let params = new HttpParams().set('gender', this.genderValue);
+    this.names$ = this._nameSrv._data.pipe(
       tap(() => {
         this.loading = false;
       })

@@ -11,8 +11,8 @@ export abstract class BaseApiService<T> {
   private _dataSubject = new BehaviorSubject<T[]>([]);
   readonly _data: Observable<T[]> = this._dataSubject.asObservable();
 
-  constructor(protected http: HttpClient, protected apiUrl: string) {
-    this.loadAll()
+  constructor(protected http: HttpClient, protected apiUrl: string, protected params?:HttpParams) {
+    this.loadAll(params)
   }
 
   loadAll(params?: HttpParams) {
@@ -41,7 +41,7 @@ export abstract class BaseApiService<T> {
   create(data: T): Observable<T> {
     return this.http.post<T>(`${this.apiUrl}`, data).pipe(
       tap(() => {
-        this.loadAll()
+        this.loadAll(this.params)
       })
     );
   }
@@ -49,7 +49,7 @@ export abstract class BaseApiService<T> {
   update(id: string, data: T): Observable<T> {
     return this.http.patch<T>(`${this.apiUrl}/${id}`, data).pipe(
       tap(() => {
-        this.loadAll()
+        this.loadAll(this.params)
       }),
     );
   }
@@ -57,7 +57,7 @@ export abstract class BaseApiService<T> {
   delete(id: string): Observable<T> {
     return this.http.delete<T>(`${this.apiUrl}/${id}`).pipe(
       tap(() => {
-        this.loadAll()
+        this.loadAll(this.params)
       }),
     );
   }
