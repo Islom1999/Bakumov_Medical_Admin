@@ -51,6 +51,14 @@ const routes: Routes = [
         path: 'training-item',
         loadChildren: () => import('../modules/index').then((modules) => modules.TrainingItemModule)
       },
+      {
+        path: 'promo-code',
+        loadChildren: () => import('../modules/index').then((modules) => modules.PromoCodeModule)
+      },
+      {
+        path: 'client',
+        loadChildren: () => import('../modules/index').then((modules) => modules.UserModule)
+      },
     ]
   }
 ];

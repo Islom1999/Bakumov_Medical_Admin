@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Permission } from 'src/enumerations';
-import { RoleService } from '../../service/role.service';
+import { PromoCodeService } from '../../service/promo-code.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
+import { IAdmin } from 'src/interfaces';
+import { AdminService } from 'src/app/modules/admin/service/admin.service';
 
 @Component({
-  selector: 'app-role-detail',
-  templateUrl: './role-detail.component.html',
-  styleUrls: ['./role-detail.component.scss'],
+  selector: 'app-promo-code-detail',
+  templateUrl: './promo-code-detail.component.html',
+  styleUrls: ['./promo-code-detail.component.scss']
 })
-export class RoleDetailComponent implements OnInit {
-  permissionsTypes: Permission[] = Object.values(Permission);
-  listOfSelectedValue = [];
+export class PromoCodeDetailComponent {
+  admin: Observable<IAdmin[]> = of([]);
   loading = true;
   disableBtn = true;
 
@@ -24,7 +24,8 @@ export class RoleDetailComponent implements OnInit {
   }
 
   constructor(
-    private _roleSrv: RoleService,
+    private _promoCodeSrv: PromoCodeService,
+    private _adminSrv: AdminService,
     private nzMessageService: NzMessageService,
     private router: Router,
     private route: ActivatedRoute
@@ -32,12 +33,14 @@ export class RoleDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      permission: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      discount: new FormControl('', [Validators.required]),
+      isActive: new FormControl('', [Validators.required]),
+      adminId: new FormControl(''),
     });
     if (this.id) {
-      this._roleSrv.getById(this.id).subscribe((role) => {
-        this.form.patchValue(role);
+      this._promoCodeSrv.getById(this.id).subscribe((promoCode) => {
+        this.form.patchValue(promoCode);
         this.disableBtn = false;
         this.loading = false;
       });
@@ -45,6 +48,7 @@ export class RoleDetailComponent implements OnInit {
       this.loading = false;
       this.disableBtn = false;
     }
+    this.admin = this._adminSrv._data
   }
 
   submit() {
@@ -66,7 +70,7 @@ export class RoleDetailComponent implements OnInit {
   }
 
   create() {
-    this._roleSrv
+    this._promoCodeSrv
       .create(this.form.value)
       .pipe(
         catchError(({ error }) => {
@@ -78,12 +82,12 @@ export class RoleDetailComponent implements OnInit {
       )
       .subscribe(() => {
         this.nzMessageService.success('Create data');
-        this.router.navigate(['/', 'role']);
+        this.router.navigate(['/', 'promo-code']);
       });
   }
 
   update(id: string) {
-    this._roleSrv
+    this._promoCodeSrv
       .update(id, this.form.value)
       .pipe(
         catchError(({ error }) => {
@@ -95,7 +99,7 @@ export class RoleDetailComponent implements OnInit {
       )
       .subscribe(() => {
         this.nzMessageService.success('Update data');
-        this.router.navigate(['/', 'role']);
+        this.router.navigate(['/', 'promo-code']);
       });
   }
 }
