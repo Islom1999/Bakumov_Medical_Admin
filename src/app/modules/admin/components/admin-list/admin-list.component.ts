@@ -4,6 +4,8 @@ import { BaseComponentList } from 'src/app/base/components/base-list';
 import { IAdmin } from 'src/interfaces';
 import { AdminService } from '../../service/admin.service';
 import { Observable, of, switchMap } from 'rxjs';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-admin-list',
@@ -17,12 +19,21 @@ export class AdminListComponent extends BaseComponentList<IAdmin> {
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Adminlar", 
+    label: "Adminlar ro'yhati", 
+    url: '/admin'
+  };
+
   constructor(
     _adminSrv: AdminService,
-    _messageSrv: NzMessageService  
+    _messageSrv: NzMessageService,
+    _breadcrumbService: BreadcrumbsService
   ){
-    super(_adminSrv, _messageSrv)
+    super(_adminSrv, _messageSrv, _breadcrumbService)
   }
+
+  
 
   override ngOnInit(): void {
     super.ngOnInit();

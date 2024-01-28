@@ -4,6 +4,8 @@ import { Observable, of, switchMap } from 'rxjs';
 import { BaseComponentList } from 'src/app/base/components/base-list';
 import { INoticeable } from 'src/interfaces';
 import { NoticeableService } from '../../service/noticeable.service';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-noticeable-list',
@@ -17,8 +19,14 @@ export class NoticeableListComponent extends BaseComponentList<INoticeable> {
   searchValue = '';
   visible = false;
 
-  constructor(_noticeableSrv: NoticeableService, _messageSrv: NzMessageService) {
-    super(_noticeableSrv, _messageSrv);
+  override breadcrumb: Breadcrumb = {
+    header: "Muhim bo'limlar", 
+    label: "Muhim bo'limlar ro'yhati", 
+    url: '/noticeable'
+  };
+
+  constructor(_noticeableSrv: NoticeableService, _messageSrv: NzMessageService, private _breadcrumbSrv: BreadcrumbsService) {
+    super(_noticeableSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

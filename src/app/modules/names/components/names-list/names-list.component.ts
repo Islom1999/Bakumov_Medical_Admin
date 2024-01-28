@@ -6,6 +6,8 @@ import { NamesService } from '../../service/names.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Gender } from 'src/enumerations';
 import { HttpParams } from '@angular/common/http';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-names-list',
@@ -21,11 +23,18 @@ export class NamesListComponent extends BaseComponentList<IName> implements OnIn
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Ismlar", 
+    label: "Ismlar ro'yhati", 
+    url: '/names'
+  };
+
   constructor(
     private _nameSrv: NamesService,
-    private _messageSrv: NzMessageService
+    private _messageSrv: NzMessageService,
+    private _breadcrumbSrv: BreadcrumbsService  
   ) {
-    super(_nameSrv, _messageSrv);
+    super(_nameSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

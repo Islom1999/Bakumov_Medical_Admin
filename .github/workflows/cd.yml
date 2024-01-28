@@ -2,7 +2,7 @@ name: Test CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ sampic ]
 
 env:
   SERVER_HOST: 91.200.151.163
@@ -10,7 +10,7 @@ env:
   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
 
-jobs:
+jobs: 
   build:
 
     runs-on: ubuntu-latest
@@ -23,9 +23,9 @@ jobs:
         username: ${{ env.SERVER_USERNAME }}
         key: ${{ env.SSH_PRIVATE_KEY }}
         script: |
-          cd ~/Bakumov_Medical_Admin/
+          cd ~/client-spare-parts/
           git pull
           npm install
           ng build
-          sudo rsync -av --delete /root/Bakumov_Medical_Admin/dist/bakumov-medical-admin/ /var/www/bakumov-medical-admin/
+          sudo rsync -av --delete /root/client-spare-parts/dist/client-spare-parts/browser/ /var/www/spare-parts/
           

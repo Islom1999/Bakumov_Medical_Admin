@@ -6,10 +6,12 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { BreadcurmbComponent } from './components/breadcurmb/breadcurmb.component';
 
 @NgModule({
   declarations: [
     LayoutsComponent,
+    BreadcurmbComponent,
   ],
   imports: [
     CommonModule,

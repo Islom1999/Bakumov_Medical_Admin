@@ -4,6 +4,8 @@ import { IRole } from 'src/interfaces';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, filter, of, switchMap } from 'rxjs';
 import { BaseComponentList } from 'src/app/base/components/base-list';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-role-list',
@@ -17,8 +19,14 @@ export class RoleListComponent extends BaseComponentList<IRole> {
   searchValue = '';
   visible = false;
 
-  constructor(_roleSrv: RoleService, _messageSrv: NzMessageService) {
-    super(_roleSrv, _messageSrv);
+  override breadcrumb: Breadcrumb = {
+    header: "Rollar", 
+    label: "Rollar ro'yhati", 
+    url: '/role'
+  };
+
+  constructor(_roleSrv: RoleService, _messageSrv: NzMessageService, _breadcrumbSrv: BreadcrumbsService) {
+    super(_roleSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

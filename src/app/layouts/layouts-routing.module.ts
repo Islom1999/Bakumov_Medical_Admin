@@ -47,10 +47,10 @@ const routes: Routes = [
         path: 'training',
         loadChildren: () => import('../modules/index').then((modules) => modules.TrainingModule)
       },
-      {
-        path: 'training-item',
-        loadChildren: () => import('../modules/index').then((modules) => modules.TrainingItemModule)
-      },
+      // {
+      //   path: 'training-item',
+      //   loadChildren: () => import('../modules/index').then((modules) => modules.TrainingItemModule)
+      // },
       {
         path: 'promo-code',
         loadChildren: () => import('../modules/index').then((modules) => modules.PromoCodeModule)

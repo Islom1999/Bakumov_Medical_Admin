@@ -6,6 +6,8 @@ import { NoticeableItemService } from '../../service/noticeable-item.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NoticeableService } from 'src/app/modules/noticeable/service/noticeable.service';
 import { HttpParams } from '@angular/common/http';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-noticeable-item-list',
@@ -21,12 +23,19 @@ export class NoticeableItemListComponent extends BaseComponentList<INoticeableIt
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Muhim ma'lumotlar", 
+    label: "Muhim ma'lumotlar ro'yhati", 
+    url: '/noticeable-item'
+  };
+
   constructor(
     private _noticeableItemSrv: NoticeableItemService,
     private _messageSrv: NzMessageService,
-    private _noticeableSrv: NoticeableService
+    private _noticeableSrv: NoticeableService,
+    private _breadcrumbSrv: BreadcrumbsService
   ){
-    super(_noticeableItemSrv, _messageSrv);
+    super(_noticeableItemSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

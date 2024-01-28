@@ -6,6 +6,8 @@ import { TrainingItemService } from '../../service/training-item.service';
 import { TrainingService } from 'src/app/modules/training/service/training.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { HttpParams } from '@angular/common/http';
+import { Breadcrumb } from 'src/types/breadcrump';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 
 @Component({
   selector: 'app-training-item-list',
@@ -21,12 +23,20 @@ export class TrainingItemListComponent extends BaseComponentList<ITrainingItem> 
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Mashqlar malumotlari", 
+    label: "Mashqlar malumotlari ro'yhati", 
+    url: '/training-item'
+  };
+
+
   constructor(
     private _trainingItemSrv: TrainingItemService,
     private _trainingSrv: TrainingService,
     private _messageSrv: NzMessageService,
+    private _breadcrumbSrv: BreadcrumbsService,
   ) {
-    super(_trainingItemSrv, _messageSrv);
+    super(_trainingItemSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

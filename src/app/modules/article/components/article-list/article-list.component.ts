@@ -4,6 +4,8 @@ import { IArticle } from 'src/interfaces';
 import { ArticleService } from '../../service/article.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, of, switchMap, tap } from 'rxjs';
+import { Breadcrumb } from 'src/types/breadcrump';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 
 @Component({
   selector: 'app-article-list',
@@ -17,11 +19,18 @@ export class ArticleListComponent extends BaseComponentList<IArticle> implements
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Maqolalar", 
+    label: "Maqolalar ro'yhati", 
+    url: '/article'
+  };
+
   constructor(
     private _articleSrv: ArticleService,
-    private _messageSrv: NzMessageService  
+    private _messageSrv: NzMessageService,  
+    private breadcrumbSrv: BreadcrumbsService  
   ){
-    super(_articleSrv, _messageSrv);
+    super(_articleSrv, _messageSrv, breadcrumbSrv);
   }
 
   override ngOnInit(): void {

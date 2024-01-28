@@ -4,6 +4,8 @@ import { ITools } from 'src/interfaces';
 import { ToolsService } from '../../service/tools.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { BaseComponentList } from 'src/app/base/components/base-list';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-tools-list',
@@ -19,11 +21,19 @@ export class ToolsListComponent extends BaseComponentList<ITools> implements OnI
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Yordamchilar", 
+    label: "Yordamchilar ro'yhati", 
+    url: '/tools'
+  };
+
+
   constructor(
     private _toolsSrv: ToolsService,
     private _messageSrv: NzMessageService,
+    private _breadcrumbSrv: BreadcrumbsService
   ){
-    super(_toolsSrv, _messageSrv);
+    super(_toolsSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

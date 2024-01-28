@@ -1,25 +1,25 @@
 
 <div class="table-top">
     <div class="left">
-        <h2>Vositalar ro'yhati</h2>
+        <h2>Yordamchilar ro'yhati</h2>
         <!-- <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a parent" [(ngModel)]="toolsParam" 
         (ngModelChange)="filterParent($event)">
             <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of toolsType"></nz-option>
         </nz-select> -->
     </div>
     <div class="right">
-        <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
+        <!-- <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
             <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
-        </a>
+        </a> -->
     </div>
 </div>
 
-<nz-table #basicTable [nzData]="(tools$ | async) ?? []" [nzLoading]="(tools$ | async) ? false : true">
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable [nzData]="(tools$ | async) ?? []" [nzLoading]="(tools$ | async) ? false : true">
     <thead>
         <tr>
-            <th>No</th>
+            <th nzWidth="50px">No</th>
             <th nzCustomFilter>
-                Name
+                Nomi
                 <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                     <button nz-button nzSize="large">
                         <span nz-icon nzType="search" style="color: blue;"></span>
@@ -28,7 +28,7 @@
             </th>
             <th>Role turi</th>
             <th>Xizmat turi</th>
-            <th>Action</th>
+            <th>Boshqaruv</th>
         </tr>
     </thead>
     <tbody>
@@ -39,11 +39,11 @@
             <td>{{ data.toolsType }}</td>
             <td>
                 <nz-button-group>
-                    <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="topRight" nz-button
+                    <!-- <button nzType="default" nz-button nzSize="large" nz-popconfirm
+                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
                         (nzOnConfirm)="delete(data.id)">
                         <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
-                    </button>
+                    </button> -->
                     <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
                         <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
                     </a>

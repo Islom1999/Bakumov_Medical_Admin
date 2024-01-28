@@ -1,41 +1,52 @@
-<nz-layout>
+<nz-layout class="layout">
     <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-        <div class="logo"></div>
+        <div class="logo">
+            <img src="/assets/images/logo.png" alt="">
+        </div>
         <ul nz-menu nzTheme="dark" nzMode="inline">
-            <li nz-submenu nzTitle="Admins" nzIcon="user">
+            <li nz-submenu nzTitle="Admins" nzIcon="user-switch">
                 <ul>
-                    <li nz-menu-item routerLink="admin">Admins</li>
-                    <li nz-menu-item routerLink="role">Roles</li>
+                    <li nz-menu-item routerLink="admin">Adminlar</li>
+                    <li nz-menu-item routerLink="role">Rollar</li>
+                    <li nz-menu-item routerLink="promo-code">Promo-code</li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Maqolalar" nzIcon="form">
+                <ul>
+                    <li nz-menu-item routerLink="article">Maqolalar</li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Muhim ma'limotlar" nzIcon="profile">
+                <ul>
+                    <li nz-menu-item routerLink="noticeable">Muhim bo'limlar</li>
+                    <li nz-menu-item routerLink="noticeable-item">Muhim malumotlar</li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Yordamchilar" nzIcon="schedule">
+                <ul>
+                    <li nz-menu-item routerLink="tools">Yordamchilar</li>
+                    <li nz-menu-item routerLink="names">Ismlar</li>
+                    <li nz-menu-item routerLink="training">Mashqlar</li>
+                    <li nz-menu-item routerLink="possible">Xavfsiz bo'limlar</li>
+                    <li nz-menu-item routerLink="possible-item">Xavfsiz ma'lumotlar</li>
+                    <!-- <li nz-menu-item routerLink="training-item">Training Item - (Mashqlar bo'limlari)</li> -->
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Foydalanuvchilar" nzIcon="solution">
+                <ul>
+                    <li nz-menu-item routerLink="client">Foydalanuvchilar</li>
                 </ul>
             </li>
         </ul>
-        <ul nz-menu nzTheme="dark" nzMode="inline">
-            <li nz-submenu nzTitle="Contents" nzIcon="user">
-                <ul>
-                    <li nz-menu-item routerLink="article">Articles - (Maqolalar)</li>
-                    <li nz-menu-item routerLink="noticeable">Noticeable - (Muhim)</li>
-                    <li nz-menu-item routerLink="noticeable-item">Noticeable Item - (Muhim bo'limlari)</li>
-                    <li nz-menu-item routerLink="tools">Tools - (Vositalar)</li>
-                    <li nz-menu-item routerLink="names">Names - (Ismlar)</li>
-                    <li nz-menu-item routerLink="possible">Possible - (Xavfsizmi)</li>
-                    <li nz-menu-item routerLink="possible-item">Possible-Item - (Xavfsizmi bo'limlari)</li>
-                    <li nz-menu-item routerLink="training">Training - (Mashqlar)</li>
-                    <li nz-menu-item routerLink="training-item">Training Item - (Mashqlar bo'limlari)</li>
-                    <li nz-menu-item routerLink="promo-code">Promo code</li>
-                    <li nz-menu-item routerLink="client">Client user</li>
-                </ul>
-            </li>
-        </ul>
+   
     </nz-sider>
-    <nz-layout>
+    <nz-layout class="right-layout" [style.marginLeft]="isCollapsed ? '80px' : '200px'" >
         <!-- header -->
         <ng-container [ngTemplateOutlet]="header"></ng-container>
 
         <nz-content>
-            <nz-breadcrumb>
-                <nz-breadcrumb-item>User</nz-breadcrumb-item>
-                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
-            </nz-breadcrumb>
+            <!-- Components -->
+            <breadcrumb></breadcrumb>
             
             <div class="inner-content">
                 <!-- body -->

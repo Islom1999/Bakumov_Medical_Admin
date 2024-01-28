@@ -1,0 +1,25 @@
+.table-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0px;
+}
+
+.search-box {
+  padding: 10px;
+  width: 100%;
+}
+
+.search-box input {
+  width: 100%;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}
+

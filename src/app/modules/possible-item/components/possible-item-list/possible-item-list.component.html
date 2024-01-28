@@ -1,4 +1,4 @@
-<h2>Noticeable - (Muhimlar)</h2>
+<h2>Xavfsiz ma'lumotlar ro'yhati</h2>
 
 <div class="table-top">
     <div class="left">
@@ -14,11 +14,11 @@
     </div>
 </div>
 
-<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(possibleItem$ | async) ?? []" [nzLoading]="loading">
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #fixedTable nzTableLayout="fixed" [nzData]="(possibleItem$ | async) ?? []" [nzLoading]="loading">
     <thead>
         <tr>
             <th nzWidth="50px">No</th>
-            <th nzWidth="30%" nzCustomFilter>
+            <th nzCustomFilter>
                 Nomi
                 <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                     <button nz-button nzSize="large" >
@@ -26,21 +26,21 @@
                     </button>
                 </nz-filter-trigger>
             </th>
-            <th nzWidth="150px">Trim</th>
-            <th nzWidth="40%" nzEllipsis>Malumotlar</th>
-            <th nzWidth="200px">Boshqaruv</th>
+            <th>Trim</th>
+            <!-- <th nzEllipsis>Malumotlar</th> -->
+            <th>Boshqaruv</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let data of fixedTable.data; index as i">
-            <td nzEllipsis>{{ i+1 }}</td>
+            <td>{{ i+1 }}</td>
             <td>{{ data.name }}</td>
-            <td>{{ data.isPossible }}</td>
-            <td nzEllipsis>{{ data.descr }}</td>
+            <td>{{ data.isPossible ? "Xavfli" : "Xavfsiz" }}</td>
+            <!-- <td nzEllipsis>{{ data.descr }}</td> -->
             <td>
                 <nz-button-group>
                     <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="topRight" nz-button
+                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
                         (nzOnConfirm)="delete(data.id)">
                         <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
                     </button>

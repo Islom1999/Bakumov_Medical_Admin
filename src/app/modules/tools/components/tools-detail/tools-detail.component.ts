@@ -95,8 +95,13 @@ export class ToolsDetailComponent extends BaseImageUpload {
   }
 
   update(id: string) {
+    const {name, roleType} = this.form.value
     this._toolsSrv
-      .update(id, {...this.form.value, icon: this.image})
+      .update(id, {
+        name, 
+        roleType, 
+        icon: this.image,
+      })
       .pipe(
         catchError(({ error }) => {
           if (error?.statusCode == 409)

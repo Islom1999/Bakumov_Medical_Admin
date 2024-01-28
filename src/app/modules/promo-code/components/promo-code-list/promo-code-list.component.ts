@@ -7,6 +7,8 @@ import { AdminService } from 'src/app/modules/admin/service/admin.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { IAdmin } from 'src/interfaces';
 import { HttpParams } from '@angular/common/http';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-promo-code-list',
@@ -22,12 +24,19 @@ export class PromoCodeListComponent extends BaseComponentList<IPromoCode> {
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Promocodelar", 
+    label: "Promocodelar ro'yhati", 
+    url: '/promo-code'
+  };
+
   constructor(
     private _promoCodeSrv: PromoCodeService,
     private _adminSrv: AdminService,
     private _messageSrv: NzMessageService,
+    private _breadcrumbSrv: BreadcrumbsService
   ) {
-    super(_promoCodeSrv, _messageSrv);
+    super(_promoCodeSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

@@ -1,4 +1,4 @@
-<h2>Promo code</h2>
+<h2>Promocodelar ro'yhati</h2>
 
 <div class="table-top">
     <div class="left">
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(promoCode$ | async) ?? []" [nzLoading]="loading">
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #fixedTable nzTableLayout="fixed" [nzData]="(promoCode$ | async) ?? []" [nzLoading]="loading">
     <thead>
         <tr>
             <th nzWidth="50px">No</th>
@@ -40,7 +40,7 @@
             <td>
                 <nz-button-group>
                     <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="topRight" nz-button
+                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
                         (nzOnConfirm)="delete(data.id)">
                         <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
                     </button>

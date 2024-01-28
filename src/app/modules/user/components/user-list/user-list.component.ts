@@ -6,6 +6,8 @@ import { UserService } from '../../service/user.service';
 import { AdminService } from 'src/app/modules/admin/service/admin.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { HttpParams } from '@angular/common/http';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-user-list',
@@ -22,11 +24,18 @@ export class UserListComponent
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Foydalanuvchilar", 
+    label: "Foydalanuvchilar ro'yhati", 
+    url: '/client'
+  };
+
   constructor(
     private _userSrv: UserService,
-    private _messageSrv: NzMessageService
+    private _messageSrv: NzMessageService,
+    private _breadcrumbSrv: BreadcrumbsService
   ) {
-    super(_userSrv, _messageSrv);
+    super(_userSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

@@ -1,5 +1,19 @@
-nz-layout{
-    min-height: 100vh;
+.layout{
+  min-height: 100vh;
+  z-index: 100;
+}
+
+.right-layout {
+  margin-left: 200px;
+  transition: .5s;
+}
+
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+  left: 0;
 }
 
 .trigger {
@@ -15,9 +29,15 @@ nz-layout{
 }
 
 .logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 150px;
   margin: 16px;
+  margin-bottom: 50px;
+
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
 nz-header {
@@ -27,10 +47,6 @@ nz-header {
 
 nz-content {
   margin: 0 16px;
-}
-
-nz-breadcrumb {
-  margin: 16px 0;
 }
 
 .inner-content {

@@ -10,35 +10,35 @@
     </div>
 </div>
 
-<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(articles$ | async) ?? []" [nzLoading]="loading">
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable nzTableLayout="fixed" [nzData]="(articles$ | async) ?? []" [nzLoading]="loading">
     <thead>
         <tr>
             <th nzWidth="50px">No</th>
-            <th nzWidth="30%" nzCustomFilter>
-                Nomi
+            <th nzCustomFilter>
+                Maqola sarlavhasi
                 <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                     <button nz-button nzSize="large" >
                         <span nz-icon nzType="search" style="color: blue;"></span>
                     </button>
                 </nz-filter-trigger>
             </th>
-            <th nzWidth="150px">Xizmat turi</th>
-            <th nzWidth="150px">Role turi</th>
-            <th nzWidth="40%" nzEllipsis>Maqolalar</th>
-            <th nzWidth="200px">Boshqaruv</th>
+            <th>Xizmat turi</th>
+            <th>Role turi</th>
+            <!-- <th nzEllipsis>Maqolalar</th> -->
+            <th>Boshqaruv</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of fixedTable.data; index as i">
-            <td nzEllipsis>{{ i+1 }}</td>
+        <tr *ngFor="let data of basicTable.data; index as i">
+            <td>{{ i+1 }}</td>
             <td>{{ data.title }}</td>
             <td>{{ data.serviceType }}</td>
             <td>{{ data.roleType }}</td>
-            <td nzEllipsis>{{ data.descr }}</td>
+            <!-- <td class="ellipsis" [innerHTML]="data.descr"><td> -->
             <td>
                 <nz-button-group>
                     <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="topRight" nz-button
+                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
                         (nzOnConfirm)="delete(data.id)">
                         <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
                     </button>

@@ -1,6 +1,6 @@
 <div class="content-container">
     <nz-spin class="nz-spin" [nzSpinning]="loading">
-        <h2 class="form-title">{{id ? "Update" : "Create"}} Muhim</h2>
+        <h2 class="form-title">{{id ? "Xavfsiz ma'lumotni o'zgartirish" : "Xavfsiz ma'lumot qo'shish"}}</h2>
 
         <div class="image-container">
             <nz-spin [nzSpinning]="loadingImage">
@@ -24,14 +24,14 @@
 
         <form nz-form [formGroup]="form" (submit)="submit()">
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Title</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Nomi</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
                     <input nz-input placeholder="Title" formControlName="name" />
                 </nz-form-control>
             </nz-form-item>
 
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Parent</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Bo'limi</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
                     <nz-select nzPlaceHolder="Please select" formControlName="possibleId">
                         <nz-option *ngFor="let item of possible | async" [nzLabel]="item.name"
@@ -41,17 +41,17 @@
             </nz-form-item>
 
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Mumkinmi</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Holati</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
                     <nz-select nzPlaceHolder="Please select" formControlName="isPossible">
-                        <nz-option [nzLabel]="'Mumkin'" [nzValue]="true"></nz-option>
-                        <nz-option [nzLabel]="'Mumkin emas'" [nzValue]="false"></nz-option>
+                        <nz-option [nzLabel]="'Xavfli'" [nzValue]="true"></nz-option>
+                        <nz-option [nzLabel]="'Xavfsiz'" [nzValue]="false"></nz-option>
                     </nz-select>
                 </nz-form-control>
             </nz-form-item>
 
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Description</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Batafsil ma'lumoti</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
                     <div class="content" role="main">
                         <ckeditor class="ckeditor" [editor]="Editor" formControlName="descr">

@@ -1,9 +1,9 @@
 <div class="content-container">
     <nz-spin [nzSpinning]="loading">
         <form nz-form [formGroup]="form" (submit)="submit()">
-            <h2 class="form-title">{{id ? "Update" : "Create"}} Role</h2>
+            <h2 class="form-title">{{id ? "Rolni o'zgartirish" : "Role qo'shish"}}</h2>
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Role name</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Role nomi</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
                     <input nz-input placeholder="Role name" formControlName="title" />
                     <ng-template #userErrorTpl let-control>
@@ -14,7 +14,7 @@
             </nz-form-item>
         
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Permisions</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Ruxsatnomalari</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your permision!">
                     <nz-select 
                         [nzMaxTagCount]="3" 

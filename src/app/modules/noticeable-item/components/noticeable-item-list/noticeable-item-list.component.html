@@ -1,4 +1,4 @@
-<h2>Noticeable - (Muhimlar)</h2>
+<h2>Muhim ma'lumotlar ro'yhati</h2>
 
 <div class="table-top">
     <div class="left">
@@ -14,11 +14,11 @@
     </div>
 </div>
 
-<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(noticeableItem$ | async) ?? []" [nzLoading]="loading">
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #fixedTable nzTableLayout="fixed" [nzData]="(noticeableItem$ | async) ?? []" [nzLoading]="loading">
     <thead>
         <tr>
             <th nzWidth="50px">No</th>
-            <th nzWidth="30%" nzCustomFilter>
+            <th nzCustomFilter>
                 Nomi
                 <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                     <button nz-button nzSize="large" >
@@ -26,17 +26,17 @@
                     </button>
                 </nz-filter-trigger>
             </th>
-            <th nzWidth="150px">Trim</th>
-            <th nzWidth="40%" nzEllipsis>Malumotlar</th>
-            <th nzWidth="200px">Boshqaruv</th>
+            <th>Trimestr</th>
+            <!-- <th>Malumotlar</th> -->
+            <th>Boshqaruv</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let data of fixedTable.data; index as i">
-            <td nzEllipsis>{{ i+1 }}</td>
+            <td>{{ i+1 }}</td>
             <td>{{ data.title }}</td>
             <td>{{ data.trim }}</td>
-            <td nzEllipsis>{{ data.descr }}</td>
+            <!-- <td>{{ data.descr }}</td> -->
             <td>
                 <nz-button-group>
                     <button nzType="default" nz-button nzSize="large" nz-popconfirm

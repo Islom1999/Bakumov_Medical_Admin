@@ -1,6 +1,6 @@
 <div class="content-container">
     <nz-spin class="nz-spin" [nzSpinning]="loading">
-        <h2 class="form-title">{{id ? "Update" : "Create"}} Mashqlar</h2>
+        <h2 class="form-title">{{id ? "Mashqni o'zgartirish" : "Mashq qo'shish"}}</h2>
 
         <div class="image-container">
             <nz-spin [nzSpinning]="loadingImage">
@@ -24,14 +24,14 @@
 
         <form nz-form [formGroup]="form" (submit)="submit()">
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Name</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Nomi</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
                     <input nz-input placeholder="Name" formControlName="name" />
                 </nz-form-control>
             </nz-form-item>
 
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Description</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Bajarilish tartibi</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
                     <div class="content" role="main">
                         <ckeditor class="ckeditor" [editor]="Editor" formControlName="descr">

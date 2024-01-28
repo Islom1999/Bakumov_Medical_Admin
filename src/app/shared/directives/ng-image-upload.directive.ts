@@ -16,7 +16,7 @@ export class UploadImageDirective {
     if (!file) return;
 
     // Check file type
-    const allowedTypes = ['image/png', 'image/jpeg', 'image/gif'];
+    const allowedTypes = ['image/png', 'image/jpeg', 'image/gif', 'image/jpg'];
     if (!allowedTypes.includes(file.type)) {
       this.message.error('Invalid file type. Only PNG, JPEG and GIF images are allowed.')
       return;

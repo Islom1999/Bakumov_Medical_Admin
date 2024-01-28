@@ -1,6 +1,6 @@
 <div class="table-top">
     <div class="left">
-        <h2>Muhimlar ro'yhati</h2>
+        <h2>Muhim bo'limlar ro'yhati</h2>
     </div>
     <div class="right">
         <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
@@ -9,12 +9,12 @@
     </div>
 </div>
 
-<nz-table #basicTable [nzData]="(noticeable$ | async) ?? []" [nzLoading]="(noticeable$ | async) ? false : true">
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable [nzData]="(noticeable$ | async) ?? []" [nzLoading]="(noticeable$ | async) ? false : true">
     <thead>
         <tr>
-            <th>No</th>
+            <th nzWidth="50px">No</th>
             <th nzCustomFilter>
-                Name
+                Nomi
                 <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
                     <button nz-button nzSize="large">
                         <span nz-icon nzType="search" style="color: blue;"></span>
@@ -22,7 +22,7 @@
                 </nz-filter-trigger>
             </th>
             <th>Role turi</th>
-            <th>Action</th>
+            <th>Boshqaruv</th>
         </tr>
     </thead>
     <tbody>
@@ -33,7 +33,7 @@
             <td>
                 <nz-button-group>
                     <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="topRight" nz-button
+                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
                         (nzOnConfirm)="delete(data.id)">
                         <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
                     </button>

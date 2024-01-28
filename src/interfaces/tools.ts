@@ -5,7 +5,7 @@ export interface ITools{
     id?: string;
     icon: string;
     name: string;
-    toolsType: string;
-    serviceType: ToolsType;
+    toolsType?: string;
+    serviceType?: ToolsType;
     roleType?: RoleType;
 }   

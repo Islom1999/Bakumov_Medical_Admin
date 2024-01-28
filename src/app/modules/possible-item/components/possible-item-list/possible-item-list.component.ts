@@ -6,6 +6,8 @@ import { PossibleItemService } from '../../service/possible-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { PossibleService } from 'src/app/modules/possible/service/possible.service';
 import { HttpParams } from '@angular/common/http';
+import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { Breadcrumb } from 'src/types/breadcrump';
 
 @Component({
   selector: 'app-possible-item-list',
@@ -21,12 +23,20 @@ export class PossibleItemListComponent extends BaseComponentList<IPossibleItem> 
   searchValue = '';
   visible = false;
 
+  override breadcrumb: Breadcrumb = {
+    header: "Xavfsiz ma'lumotlar", 
+    label: "Xavfsiz ma'lumotlar ro'yhati", 
+    url: '/possible-item'
+  };
+
+
   constructor(
     private _possibleItemSrv: PossibleItemService,
     private _possibleSrv: PossibleService,
     private _messageSrv: NzMessageService,
+    private _breadcrumbSrv: BreadcrumbsService
   ) {
-    super(_possibleItemSrv, _messageSrv);
+    super(_possibleItemSrv, _messageSrv, _breadcrumbSrv);
   }
 
   override ngOnInit(): void {

@@ -1,4 +1,4 @@
-<h2>User code</h2>
+<h2>Foydalanuvchilar ro'yhati</h2>
 
 <div class="table-top">
     <div class="left">
@@ -8,13 +8,13 @@
         </nz-select> -->
     </div>
     <div class="right">
-        <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
+        <!-- <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
             <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
-        </a>
+        </a> -->
     </div>
 </div>
 
-<nz-table #fixedTable nzTableLayout="fixed" [nzData]="(user$ | async) ?? []" [nzLoading]="loading">
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #fixedTable nzTableLayout="fixed" [nzData]="(user$ | async) ?? []" [nzLoading]="loading">
     <thead>
         <tr>
             <th nzWidth="50px">No</th>
@@ -31,25 +31,27 @@
             <th>Tel raqami</th>
             <th>Holati</th>
             <th>Premium turi</th>
+            <th>Premium sanasi</th>
             <th>Boshqaruv</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let data of fixedTable.data; index as i">
             <td nzEllipsis>{{ i+1 }}</td>
-            <td>{{ data.fullname }}</td>
+            <td>{{ data.fullname ? data.fullname : "------------" }}</td>
             <!-- <td>{{ data.username }}</td> -->
-            <td>{{ data.date_of_birth }}</td>
+            <td>{{ (data.date_of_birth | date : 'dd.mm.yyyy') ? (data.date_of_birth | date : 'dd.mm.yyyy') : "--------" }}</td>
             <td>{{ data.phone }}</td>
-            <td>{{ data.isSuccess }}</td>
+            <td>{{ data.isSuccess ? "Kirilgan" : "Kirilmagan" }}</td>
             <td>{{ data.roleType }}</td>
+            <td>{{ (data.date_premium_active | date : 'dd.mm.yyyy') ?  (data.date_premium_active | date : 'dd.mm.yyyy') : "--------" }}</td>
             <td>
                 <nz-button-group>
-                    <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="topRight" nz-button
+                    <!-- <button nzType="default" nz-button nzSize="large" nz-popconfirm
+                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
                         (nzOnConfirm)="delete(data.id)">
                         <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
-                    </button>
+                    </button> -->
                     <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
                         <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
                     </a>
