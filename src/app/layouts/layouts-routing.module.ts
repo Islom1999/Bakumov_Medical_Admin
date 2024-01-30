@@ -59,6 +59,10 @@ const routes: Routes = [
         path: 'client',
         loadChildren: () => import('../modules/index').then((modules) => modules.UserModule)
       },
+      {
+        path: 'order',
+        loadChildren: () => import('../modules/index').then((modules) => modules.OrderModule)
+      },
     ]
   }
 ];

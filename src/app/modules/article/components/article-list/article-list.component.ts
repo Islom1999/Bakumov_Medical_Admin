@@ -35,11 +35,17 @@ export class ArticleListComponent extends BaseComponentList<IArticle> implements
 
   override ngOnInit(): void {
     super.ngOnInit();
+    this.loading = true
     this.articles$ = this.data$.pipe(
       tap(() => {
         this.loading = false
       }) 
     )
+
+    this.articles$.subscribe(data  => {
+      this.loading = false
+    })
+    
   }
 
   // Search reset function

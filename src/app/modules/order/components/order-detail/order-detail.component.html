@@ -1,0 +1,90 @@
+
+<h2>Foydalanuvchi ma'lumotlari</h2>
+<nz-table [nzData]="[order?.user]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Ism familiyasi</th>
+            <th>Telefoni</th>
+            <th>Statusi</th>
+            <th>Premium sanasi</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let user of [order?.user]">
+        <tr>
+            <td>{{user?.fullname}}</td>
+            <td>{{user?.phone}}</td>
+            <td>{{user?.roleType}}</td>
+            <td>{{user?.date_premium_active | date : 'dd.MM.YYYY'}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>Tarif ma'lumotlari</h2>
+<nz-table [nzData]="[order?.premium]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Nomi</th>
+            <th>Turi</th>
+            <th>Narxi</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let premium of [order?.premium]">
+        <tr>
+            <td>{{premium?.name}}</td>
+            <td>{{premium?.month}}</td>
+            <td>{{premium?.price}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<h2>Order ma'lumotlari</h2>
+<nz-table [nzData]="[order]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Holati</th>
+            <th>Narxi</th>
+            <th>Chegirma</th>
+            <th>Yaratilgan vaqti</th>
+            <th>O'zgartirilgan vaqti</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let order of [order]">
+        <tr>
+            <td>
+                <nz-tag [nzColor]="order?.success ? 'success' : 'error'">
+                    {{ order?.success ? "Bajarilgan" : "Kutilmoqda" }}
+                </nz-tag>
+            </td>
+            <td>{{order?.price}}</td>
+            <td>{{order?.discount}}</td>
+            <td>{{order?.createdAt | date : 'dd.MM.YYYY'}}</td>
+            <td>{{order?.updatedAt | date : 'dd.MM.YYYY'}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>O'tkazma ma'lumotlari</h2>
+<nz-table [nzData]="[order?.paymentList]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Transaction Id</th>
+            <th>Holati</th>
+            <th>Narxi</th>
+            <th>Yaratilgan vaqti</th>
+            <th>O'zgartirilgan vaqti</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let payment of order?.paymentList || []">
+            <td>{{payment.transaction?.tid || order.tid}}</td>
+            <td>{{payment.system || 'null'}}</td>
+            <td>{{payment.amount || 'null'}}</td>
+            <td>{{payment.createdAt | date : 'dd.MM.YYYY'}}</td>
+            <td>{{payment.updatedAt | date : 'dd.MM.YYYY'}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>TID: {{order?.tid}}</h2>
+

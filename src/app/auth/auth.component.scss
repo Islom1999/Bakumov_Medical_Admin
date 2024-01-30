@@ -1,5 +1,6 @@
 .login-form {
-  max-width: 300px;
+  max-width: 600px;
+  border: 1px solid #f1f1f1;
 }
 
 .login-form-margin {
@@ -20,4 +21,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  // padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 30%;
+}
+
+.container-box {
+  padding: 16px;
 }

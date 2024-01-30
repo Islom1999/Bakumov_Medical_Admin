@@ -1,0 +1,124 @@
+<div class="table-top">
+    <div class="left">
+        <h2>Orderlar ro'yhati</h2>
+    </div>
+    <div class="right">
+        <!-- <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
+            <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        </a> -->
+    </div>
+</div>
+
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable nzTableLayout="fixed" [nzData]="(order$ | async) ?? []"
+    [nzLoading]="loading">
+    <thead>
+        <tr>
+            <th nzWidth="50px">No</th>
+            <th nzCustomFilter>
+                Foydalanuvchi
+                <nz-filter-trigger [(nzVisible)]="visibleName" [nzActive]="searchValueName.length > 0" [nzDropdownMenu]="menuName">
+                    <button nz-button nzSize="large" >
+                        <span nz-icon nzType="search" style="color: blue;"></span>
+                    </button>
+                </nz-filter-trigger>
+            </th>
+            <th>
+                Telefoni
+                <nz-filter-trigger [(nzVisible)]="visiblePhone" [nzActive]="searchValuePhone.length > 0" [nzDropdownMenu]="menuPhone">
+                    <button nz-button nzSize="large" >
+                        <span nz-icon nzType="search" style="color: blue;"></span>
+                    </button>
+                </nz-filter-trigger>
+            </th>
+            <th>
+                Ta'rif
+                <nz-filter-trigger [(nzVisible)]="visiblePremium" [nzActive]="searchValuePremium.length > 0" [nzDropdownMenu]="menuPremium">
+                    <button nz-button nzSize="large" >
+                        <span nz-icon nzType="search" style="color: blue;"></span>
+                    </button>
+                </nz-filter-trigger>
+            </th>
+            <th>
+                Holati
+                <nz-filter-trigger [(nzVisible)]="visibleSuccess" [nzActive]="searchSuccess.length > 0" [nzDropdownMenu]="menuSuccess">
+                    <button nz-button nzSize="large" >
+                        <span nz-icon nzType="search" style="color: blue;"></span>
+                    </button>
+                </nz-filter-trigger>
+            </th>
+            <th>Narxi</th>
+            <th>Chegirma</th>
+            <th>Sanasi</th>
+            <!-- <th>Boshqaruv</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data; index as i" (click)="open(data.id!)">
+            <td>{{ i+1 }}</td>
+            <td>
+                {{ data.user?.fullname }}
+            </td>
+            <td>{{ data.user?.phone }}</td>
+            <td>{{ data.premium?.name }}</td>
+            <td>
+                <nz-tag [nzColor]="data.success ? 'success' : 'error'">
+                    {{ data.success ? "Bajarilgan" : "Kutilmoqda" }}
+                </nz-tag>
+            </td>
+            <td>{{ data.price }}</td>
+            <td>{{ data.discount }}</td>
+            <td>{{ data.createdAt | date : 'dd.MM.YYYY' }}</td>
+            <!-- <td>
+                <nz-button-group>
+                    <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
+                        <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                    </a>
+                </nz-button-group>
+            </td> -->
+        </tr>
+    </tbody>
+</nz-table>
+
+<!-- Search filter -->
+<nz-dropdown-menu #menuName="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValueName" />
+            <button nz-button nzSize="small" nzType="primary" (click)="searchName()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetName()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #menuPhone="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="number" nz-input placeholder="Search phone" [(ngModel)]="searchValuePhone" />
+            <button nz-button nzSize="small" nzType="primary" (click)="searchPhone()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetPhone()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #menuPremium="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValuePremium" />
+            <button nz-button nzSize="small" nzType="primary" (click)="searchPremium()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetPremium()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #menuSuccess="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <nz-select style="display: block; margin-bottom: 10px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="searchValueSuccess">
+                <nz-option nzLabel="Bajarilgan" [nzValue]="true"></nz-option>
+                <nz-option nzLabel="Kutilmoqda" [nzValue]="false"></nz-option>
+            </nz-select>
+            <button nz-button nzSize="small" nzType="primary" (click)="searchSuccess()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetSuccess()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

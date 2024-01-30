@@ -11,7 +11,7 @@ import { Breadcrumb } from 'src/types/breadcrump';
   template:''
 })
 export abstract class BaseComponentList<T> implements OnInit {
-  loading = true
+  loading = false
   data$: Observable<T[]> = this.baseSrv._data.pipe()
 
   abstract breadcrumb: Breadcrumb
