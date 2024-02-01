@@ -41,6 +41,7 @@
     <thead>
         <tr>
             <th>No</th>
+            <th>TID</th>
             <th>Ta'rif</th>
             <th>Holati</th>
             <th>Narxi</th>
@@ -51,6 +52,7 @@
     <tbody *ngFor="let order of promoCode?.order; index as i" >
         <tr>
             <td nzWidth="50px">{{i+1}}</td>
+            <td>{{order?.tid}}</td>
             <td>{{order?.premium?.name || 'null'}}</td>
             <td>
                 <nz-tag [nzColor]="order?.success ? 'success' : 'error'">
