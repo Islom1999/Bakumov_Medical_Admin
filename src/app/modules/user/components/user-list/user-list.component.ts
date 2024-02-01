@@ -39,7 +39,8 @@ export class UserListComponent
     private _userSrv: UserService,
     private _messageSrv: NzMessageService,
     private _breadcrumbSrv: BreadcrumbsService,
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
+    
   ) {
     super(_userSrv, _messageSrv, _breadcrumbSrv);
   }

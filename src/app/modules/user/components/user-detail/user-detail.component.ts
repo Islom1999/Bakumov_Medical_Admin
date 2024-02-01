@@ -14,6 +14,7 @@ export class UserDetailComponent implements OnInit {
 
   constructor(
     private _service: UserService,
+    
   ){}
 
   ngOnInit(): void {

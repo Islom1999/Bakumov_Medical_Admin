@@ -21,4 +21,6 @@ export class PromoCodeInfoComponent implements OnInit {
       this.promoCode = promo
     })
   }
+
+  
 }
