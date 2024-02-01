@@ -1,0 +1,36 @@
+<h2>Rol ma'lumotlari</h2>
+<nz-table [nzData]="[role]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Rol nomi</th>
+            <th>Permission</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let role of [role]">
+        <tr>
+            <td>{{role?.title}}</td>
+            <td>{{role?.permission  | json}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<h2>Adminlar ma'lumotlari</h2>
+<nz-table [nzData]="[role?.admins]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th nzWidth="50px">No</th>
+            <th>Rol nomi</th>
+            <th>Permission</th>
+            <th>email</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let admin of role?.admins; index as i">
+        <tr>
+            <td>{{i + 1}}</td>
+            <td>{{admin?.name}}</td>
+            <td>{{admin?.phone}}</td>
+            <td>{{admin?.email}}</td>
+        </tr>
+    </tbody>
+</nz-table>

@@ -6,6 +6,9 @@ import { AdminService } from '../../service/admin.service';
 import { Observable, of, switchMap } from 'rxjs';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { AdminDetailComponent } from '../admin-detail/admin-detail.component';
+import { AdminInfoComponent } from '../admin-info/admin-info.component';
 
 @Component({
   selector: 'app-admin-list',
@@ -28,7 +31,8 @@ export class AdminListComponent extends BaseComponentList<IAdmin> {
   constructor(
     _adminSrv: AdminService,
     _messageSrv: NzMessageService,
-    _breadcrumbService: BreadcrumbsService
+    _breadcrumbService: BreadcrumbsService,
+    private drawerService: NzDrawerService
   ){
     super(_adminSrv, _messageSrv, _breadcrumbService)
   }
@@ -60,6 +64,17 @@ export class AdminListComponent extends BaseComponentList<IAdmin> {
         )
       )
     );
+  }
+
+  open(id:string): void {
+    this.drawerService.create<AdminInfoComponent, { id: string }, string>({
+      nzTitle: 'Adminlar ma\'lumotlari',
+      nzContent: AdminInfoComponent,
+      nzSize: 'large',
+      nzContentParams: {
+        id: id
+      }
+    });
   }
 
 }

@@ -1,0 +1,65 @@
+<h2>Promocode ma'lumotlari</h2>
+<nz-table [nzData]="[promoCode]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Chegirma</th>
+            <th>Holati</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let promo of [promoCode]">
+        <tr>
+            <td>{{promo?.code}}</td>
+            <td>{{promo?.discount}}</td>
+            <td>{{promo?.isActive ? "Active" : "NoActive"}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>Admin ma'lumotlari</h2>
+<nz-table [nzData]="[promoCode]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Ism familiyasi</th>
+            <th>Telefoni</th>
+            <th>Email</th>
+            <th>Holat</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let admin of [promoCode?.admin]">
+        <tr>
+            <td>{{admin?.name}}</td>
+            <td>{{admin?.phone}}</td>
+            <td>{{admin?.email}}</td>
+            <td>{{admin?.isBlock ? "Blocked" : "UnBlocked"}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>Order ma'lumotlari</h2>
+<nz-table [nzData]="[promoCode?.order]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Ta'rif</th>
+            <th>Holati</th>
+            <th>Narxi</th>
+            <th>Chegirma</th>
+            <th>Yaratilgan vaqti</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let order of promoCode?.order; index as i" >
+        <tr>
+            <td nzWidth="50px">{{i+1}}</td>
+            <td>{{order?.premium?.name || 'null'}}</td>
+            <td>
+                <nz-tag [nzColor]="order?.success ? 'success' : 'error'">
+                    {{ order?.success ? "Bajarilgan" : "Kutilmoqda" }}
+                </nz-tag>
+            </td>
+            <td>{{order?.price || "null"}}</td>
+            <td>{{order?.discount}}</td>
+            <td>{{(order?.createdAt| date : 'dd.MM.YYYY') ||'null'}}</td>
+        </tr>
+    </tbody>
+</nz-table>

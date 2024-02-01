@@ -8,6 +8,9 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { HttpParams } from '@angular/common/http';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { UserDetailComponent } from '../user-detail/user-detail.component';
+import { UserUpdateComponent } from '../user-update/user-update.component';
 
 @Component({
   selector: 'app-user-list',
@@ -22,7 +25,9 @@ export class UserListComponent
 
   // Serch variables
   searchValue = '';
+  searchValuePhone = ''
   visible = false;
+  visiblePhone = false;
 
   override breadcrumb: Breadcrumb = {
     header: "Foydalanuvchilar", 
@@ -33,7 +38,8 @@ export class UserListComponent
   constructor(
     private _userSrv: UserService,
     private _messageSrv: NzMessageService,
-    private _breadcrumbSrv: BreadcrumbsService
+    private _breadcrumbSrv: BreadcrumbsService,
+    private drawerService: NzDrawerService
   ) {
     super(_userSrv, _messageSrv, _breadcrumbSrv);
   }
@@ -53,6 +59,11 @@ export class UserListComponent
     this.search();
   }
 
+  resetPhone(): void {
+    this.searchValuePhone = '';
+    this.searchPhone();
+  }
+
   // Search function
   search(): void {
     this.visible = false;
@@ -61,12 +72,49 @@ export class UserListComponent
         of(
           item.filter((elem) =>
             elem.fullname
-              .toLocaleLowerCase()
-              .includes(this.searchValue.toLocaleLowerCase())
+              .toLowerCase()
+              .includes(this.searchValue.toLowerCase())
           )
         )
       )
     );
+  }
+
+  searchPhone(): void {
+    this.visiblePhone = false;
+    this.user$ = this.user$.pipe(
+      switchMap((item) =>
+        of(
+          item.filter((user) =>
+            user?.phone
+              .toString()
+              .includes(this.searchValuePhone.toString())
+          )
+        )
+      )
+    );
+  }
+
+  open(id:string): void {
+    this.drawerService.create<UserDetailComponent, { id: string }, string>({
+      nzTitle: 'Foydalanuvchi ma\'lumotlari',
+      nzContent: UserDetailComponent,
+      nzSize: 'large',
+      nzContentParams: {
+        id: id
+      }
+    });
+  }
+
+  openUpdate(id:string): void {
+    this.drawerService.create<UserUpdateComponent, { id: string }, string>({
+      nzTitle: "Foydalanuvchi ma'lumotlari o'zgartirish",
+      nzContent: UserUpdateComponent,
+      nzSize: 'default',
+      nzContentParams: {
+        id: id
+      }
+    });
   }
 
   // filterParent(selectedId: string) {

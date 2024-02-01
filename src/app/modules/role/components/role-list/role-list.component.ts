@@ -6,6 +6,8 @@ import { Observable, filter, of, switchMap } from 'rxjs';
 import { BaseComponentList } from 'src/app/base/components/base-list';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { RoleInfoComponent } from '../role-info/role-info.component';
 
 @Component({
   selector: 'app-role-list',
@@ -25,7 +27,12 @@ export class RoleListComponent extends BaseComponentList<IRole> {
     url: '/role'
   };
 
-  constructor(_roleSrv: RoleService, _messageSrv: NzMessageService, _breadcrumbSrv: BreadcrumbsService) {
+  constructor(
+    _roleSrv: RoleService, 
+    _messageSrv: NzMessageService, 
+    _breadcrumbSrv: BreadcrumbsService,
+    private drawerService: NzDrawerService
+  ) {
     super(_roleSrv, _messageSrv, _breadcrumbSrv);
   }
 
@@ -55,4 +62,16 @@ export class RoleListComponent extends BaseComponentList<IRole> {
       )
     );
   }
+
+  open(id:string): void {
+    this.drawerService.create<RoleInfoComponent, { id: string }, string>({
+      nzTitle: 'Rollar ma\'lumotlari',
+      nzContent: RoleInfoComponent,
+      nzSize: 'large',
+      nzContentParams: {
+        id: id
+      }
+    });
+  }
+
 }

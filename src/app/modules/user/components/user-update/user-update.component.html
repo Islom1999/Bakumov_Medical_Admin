@@ -1,0 +1,32 @@
+<div class="content-container">
+    <nz-spin class="nz-spin" [nzSpinning]="loading">
+        <h2 class="form-title">Foydalanuvchi holatini yangilash</h2>
+
+        <form nz-form [formGroup]="form" (submit)="submit()">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Role type</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
+                    <nz-select nzPlaceHolder="Please select" formControlName="roleType">
+                        <nz-option *ngFor="let item of roleTypes" [nzLabel]="item" [nzValue]="item"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Sana</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
+                    <nz-date-picker nz-input  formControlName="date_premium_active" ></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+
+                <nz-form-item>
+                <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                    <button nz-button nzType="primary">{{id ? "Update" : "Create"}}</button>
+                    <button type="button" nz-button (click)="back()">
+                        Back
+                    </button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </nz-spin>
+</div>

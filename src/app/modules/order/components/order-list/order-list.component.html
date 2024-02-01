@@ -49,11 +49,11 @@
             <th>Narxi</th>
             <th>Chegirma</th>
             <th>Sanasi</th>
-            <!-- <th>Boshqaruv</th> -->
+            <th>Boshqaruv</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of basicTable.data; index as i" (click)="open(data.id!)">
+        <tr *ngFor="let data of basicTable.data; index as i">
             <td>{{ i+1 }}</td>
             <td>
                 {{ data.user?.fullname }}
@@ -68,13 +68,13 @@
             <td>{{ data.price }}</td>
             <td>{{ data.discount }}</td>
             <td>{{ data.createdAt | date : 'dd.MM.YYYY' }}</td>
-            <!-- <td>
+            <td>
                 <nz-button-group>
-                    <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
-                        <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
-                    </a>
+                    <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
+                        <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                    </button>
                 </nz-button-group>
-            </td> -->
+            </td>
         </tr>
     </tbody>
 </nz-table>

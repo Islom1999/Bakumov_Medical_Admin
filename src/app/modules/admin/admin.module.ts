@@ -4,6 +4,8 @@ import { AdminListComponent } from './components/admin-list/admin-list.component
 import { AdminDetailComponent } from './components/admin-detail/admin-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseModule } from 'src/app/shared/modules';
+import { AdminInfoComponent } from './components/admin-info/admin-info.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 const router: Routes =  [
   {
@@ -23,12 +25,15 @@ const router: Routes =  [
 @NgModule({
   declarations: [
     AdminListComponent,
-    AdminDetailComponent
+    AdminDetailComponent,
+    AdminInfoComponent
   ],
   imports: [
     CommonModule,
     BaseModule,
-    RouterModule.forChild(router)
+    RouterModule.forChild(router),
+
+    NzDrawerModule
   ]
 })
 export class AdminModule { }

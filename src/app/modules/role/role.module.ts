@@ -5,6 +5,8 @@ import { RoleDetailComponent } from './components/role-detail/role-detail.compon
 import { RouterModule, Routes } from '@angular/router';
 import { BaseModule } from 'src/app/shared/modules';
 import { FormsModule } from '@angular/forms';
+import { RoleInfoComponent } from './components/role-info/role-info.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 const router: Routes =  [
   {
@@ -24,12 +26,15 @@ const router: Routes =  [
 @NgModule({
   declarations: [
     RoleListComponent,
-    RoleDetailComponent
+    RoleDetailComponent,
+    RoleInfoComponent
   ],
   imports: [
     CommonModule,
     BaseModule,
     RouterModule.forChild(router),
+
+    NzDrawerModule
   ]
 })
 export class RoleModule{}

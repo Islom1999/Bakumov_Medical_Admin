@@ -1,1 +1,100 @@
-<p>user-detail works!</p>
+<h2>Foydalanuvchi ma'lumotlari</h2>
+<nz-table [nzData]="[user]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Ism familiyasi</th>
+            <th>Telefoni</th>
+            <th>Statusi</th>
+            <th>Tug'ilgan sanasi</th>
+            <th>Registratsiya</th>
+            <th>Premium sanasi</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let user of [user]">
+        <tr>
+            <td>{{user?.fullname}}</td>
+            <td>{{user?.phone}}</td>
+            <td>{{user?.roleType}}</td>
+            <td>{{(user?.date_of_birth | date : 'dd.MM.YYYY') ||'null'}}</td>
+            <td>{{(user?.createdAt| date : 'dd.MM.YYYY') ||'null'}}</td>
+            <td>{{(user?.date_premium_active | date : 'dd.MM.YYYY') || 'null' }}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>Farzand ma'lumotlari</h2>
+<nz-table [nzData]="[user?.children]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Ism familiyasi</th>
+            <th>Turi</th>
+            <th>Jinsi</th>
+            <th>Homila sanasi</th>
+            <th>Tug'ulgan vaqti</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let children of user?.children; index as i" >
+        <tr>
+            <td nzWidth="50px">{{i+1}}</td>
+            <td>{{children?.fullname || "null"}}</td>
+            <td>{{children?.serviceType}}</td>
+            <td>{{children?.gender || "null"}}</td>
+            <td>{{(children?.date_of_embry| date : 'dd.MM.YYYY') ||'null'}}</td>
+            <td>{{(children?.date_of_birth| date : 'dd.MM.YYYY') ||'null'}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>Order ma'lumotlari</h2>
+<nz-table [nzData]="[user?.order]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Ta'rif</th>
+            <th>Holati</th>
+            <th>Narxi</th>
+            <th>Chegirma</th>
+            <th>Yaratilgan vaqti</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let order of user?.order; index as i" >
+        <tr>
+            <td nzWidth="50px">{{i+1}}</td>
+            <td>{{order?.premium?.name || 'null'}}</td>
+            <td>
+                <nz-tag [nzColor]="order?.success ? 'success' : 'error'">
+                    {{ order?.success ? "Bajarilgan" : "Kutilmoqda" }}
+                </nz-tag>
+            </td>
+            <td>{{order?.price || "null"}}</td>
+            <td>{{order?.discount}}</td>
+            <td>{{(order?.createdAt| date : 'dd.MM.YYYY') ||'null'}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<h2>O'tkazma ma'lumotlari</h2>
+<nz-table [nzData]="[user?.paymentList]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Transaction Id</th>
+            <th>Turi</th>
+            <th>Narxi</th>
+            <th>Yaratilgan vaqti</th>
+            <th>O'zgartirilgan vaqti</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let payment of user?.paymentList || []; index as i">
+            <td>{{i+1}}</td>
+            <td>{{payment.transaction?.tid || 'null'}}</td>
+            <td>{{payment.system || 'null'}}</td>
+            <td>{{payment.amount || 'null'}}</td>
+            <td>{{payment.createdAt | date : 'dd.MM.YYYY'}}</td>
+            <td>{{payment.updatedAt | date : 'dd.MM.YYYY'}}</td>
+        </tr>
+    </tbody>
+</nz-table>

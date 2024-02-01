@@ -4,6 +4,10 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { BaseModule } from 'src/app/shared/modules';
 import { RouterModule, Routes } from '@angular/router';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 const router: Routes =  [
   {
@@ -23,12 +27,17 @@ const router: Routes =  [
 @NgModule({
   declarations: [
     UserListComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    UserUpdateComponent
   ],
   imports: [
     CommonModule,
     BaseModule,
-    RouterModule.forChild(router)
+    RouterModule.forChild(router),
+
+    NzDrawerModule,
+    NzTagModule,
+    NzDatePickerModule,
   ]
 })
 export class UserModule { }

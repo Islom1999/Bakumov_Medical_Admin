@@ -47,6 +47,9 @@
                     <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
                         <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
                     </a>
+                    <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
+                        <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                    </button>
                 </nz-button-group>
             </td>
         </tr>

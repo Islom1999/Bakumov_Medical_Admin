@@ -1,0 +1,55 @@
+<h2>Admin ma'lumotlari</h2>
+<nz-table [nzData]="[admin]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Ism familiyasi</th>
+            <th>Telefoni</th>
+            <th>Email</th>
+            <th>Holat</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let admin of [admin]">
+        <tr>
+            <td>{{admin?.name}}</td>
+            <td>{{admin?.phone}}</td>
+            <td>{{admin?.email}}</td>
+            <td>{{admin?.isBlock ? "Blocked" : "UnBlocked"}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>Rol ma'lumotlari</h2>
+<nz-table [nzData]="[admin?.role]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Role nomi</th>
+            <th>Imkonyatlari</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let role of [admin?.role]">
+        <tr>
+            <td>{{role?.title}}</td>
+            <td>{{role?.permission | json}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<h2>Promocode ma'lumotlari</h2>
+<nz-table [nzData]="[admin?.promo_code]" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th nzWidth="50px">No</th>
+            <th>Code</th>
+            <th>Chegirma</th>
+            <th>Holati</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let promo of admin?.promo_code; index as i">
+        <tr>
+            <td>{{i+1}}</td>
+            <td>{{promo?.code}}</td>
+            <td>{{promo?.discount}}</td>
+            <td>{{promo?.isActive ? "Active" : "NoActive"}}</td>
+        </tr>
+    </tbody>
+</nz-table>

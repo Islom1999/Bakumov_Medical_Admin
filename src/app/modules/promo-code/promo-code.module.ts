@@ -4,6 +4,9 @@ import { PromoCodeListComponent } from './components/promo-code-list/promo-code-
 import { PromoCodeDetailComponent } from './components/promo-code-detail/promo-code-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseModule } from 'src/app/shared/modules';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { PromoCodeInfoComponent } from './components/promo-code-info/promo-code-info.component';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 const router: Routes =  [
   {
@@ -23,12 +26,16 @@ const router: Routes =  [
 @NgModule({
   declarations: [
     PromoCodeListComponent,
-    PromoCodeDetailComponent
+    PromoCodeDetailComponent,
+    PromoCodeInfoComponent
   ],
   imports: [
     CommonModule,
     BaseModule,
-    RouterModule.forChild(router)
+    RouterModule.forChild(router),
+
+    NzDrawerModule,
+    NzTagModule
   ]
 })
 export class PromoCodeModule { }

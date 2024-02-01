@@ -9,6 +9,8 @@ import { IAdmin } from 'src/interfaces';
 import { HttpParams } from '@angular/common/http';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { PromoCodeInfoComponent } from '../promo-code-info/promo-code-info.component';
 
 @Component({
   selector: 'app-promo-code-list',
@@ -34,7 +36,8 @@ export class PromoCodeListComponent extends BaseComponentList<IPromoCode> {
     private _promoCodeSrv: PromoCodeService,
     private _adminSrv: AdminService,
     private _messageSrv: NzMessageService,
-    private _breadcrumbSrv: BreadcrumbsService
+    private _breadcrumbSrv: BreadcrumbsService,
+    private drawerService: NzDrawerService
   ) {
     super(_promoCodeSrv, _messageSrv, _breadcrumbSrv);
   }
@@ -78,5 +81,16 @@ export class PromoCodeListComponent extends BaseComponentList<IPromoCode> {
     } else {
       this.promoCode$ = this._promoCodeSrv.getAll();
     }
+  }
+
+  open(id:string): void {
+    this.drawerService.create<PromoCodeInfoComponent, { id: string }, string>({
+      nzTitle: 'Promocode ma\'lumotlari',
+      nzContent: PromoCodeInfoComponent,
+      nzSize: 'large',
+      nzContentParams: {
+        id: id
+      }
+    });
   }
 }

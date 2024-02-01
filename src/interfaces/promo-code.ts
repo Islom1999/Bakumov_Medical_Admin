@@ -1,3 +1,5 @@
+import { IAdmin } from "./admin";
+import { IOrder } from "./order";
 
 export interface IPromoCode{
     id?: string;
@@ -5,4 +7,7 @@ export interface IPromoCode{
     discount: number;
     isActive?: false;
     adminId?: string;
+
+    admin: IAdmin
+    order: IOrder[]
 }   

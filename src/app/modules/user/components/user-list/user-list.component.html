@@ -26,9 +26,16 @@
                     </button>
                 </nz-filter-trigger>
             </th>
+            <th>
+                Tel raqami
+                <nz-filter-trigger [(nzVisible)]="visiblePhone" [nzActive]="searchValuePhone.length > 0" [nzDropdownMenu]="menuPhone">
+                    <button nz-button nzSize="large" >
+                        <span nz-icon nzType="search" style="color: blue;"></span>
+                    </button>
+                </nz-filter-trigger>
+            </th>
             <!-- <th>Username</th> -->
             <th>Tug'ulgan sanasi</th>
-            <th>Tel raqami</th>
             <th>Holati</th>
             <th>Premium turi</th>
             <th>Premium sanasi</th>
@@ -39,22 +46,21 @@
         <tr *ngFor="let data of fixedTable.data; index as i">
             <td nzEllipsis>{{ i+1 }}</td>
             <td>{{ data.fullname ? data.fullname : "------------" }}</td>
+            <td>{{ data.phone }}</td>
             <!-- <td>{{ data.username }}</td> -->
             <td>{{ (data.date_of_birth | date : 'dd.mm.yyyy') ? (data.date_of_birth | date : 'dd.mm.yyyy') : "--------" }}</td>
-            <td>{{ data.phone }}</td>
             <td>{{ data.isSuccess ? "Kirilgan" : "Kirilmagan" }}</td>
             <td>{{ data.roleType }}</td>
             <td>{{ (data.date_premium_active | date : 'dd.mm.yyyy') ?  (data.date_premium_active | date : 'dd.mm.yyyy') : "--------" }}</td>
             <td>
                 <nz-button-group>
-                    <!-- <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
-                        (nzOnConfirm)="delete(data.id)">
-                        <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
-                    </button> -->
-                    <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
+                    <button nzType="default" nz-button nzSize="large" (click)="openUpdate(data.id!)">
                         <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
-                    </a>
+                    </button>
+
+                    <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
+                        <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                    </button>
                 </nz-button-group>
             </td>
         </tr>
@@ -67,6 +73,16 @@
             <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
             <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
             <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #menuPhone="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="number" nz-input placeholder="Search phone" [(ngModel)]="searchValuePhone" />
+            <button nz-button nzSize="small" nzType="primary" (click)="searchPhone()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetPhone()">Reset</button>
         </div>
     </div>
 </nz-dropdown-menu>
