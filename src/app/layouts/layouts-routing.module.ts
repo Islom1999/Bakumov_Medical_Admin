@@ -63,6 +63,10 @@ const routes: Routes = [
         path: 'order',
         loadChildren: () => import('../modules/index').then((modules) => modules.OrderModule)
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('../modules/index').then((modules) => modules.ProfileModule)
+      },
     ]
   }
 ];

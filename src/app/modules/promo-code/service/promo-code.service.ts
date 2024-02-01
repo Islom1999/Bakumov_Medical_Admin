@@ -12,4 +12,8 @@ export class PromoCodeService extends BaseApiService<IPromoCode> {
   constructor(http: HttpClient) {
     super(http, `${environment.apiUrl}/promo`);
   }
+
+  getAllMe(){
+      return this.http.get<IPromoCode[]>(`${this.apiUrl}/byme`);
+  }
 }

@@ -30,6 +30,7 @@
                 <nz-form-label [nzSpan]="7" nzRequired>Parent</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
                     <nz-select nzPlaceHolder="Please select" formControlName="adminId">
+                        <!-- <nz-option  [nzLabel]="'Super Admin'" [nzValue]="null"></nz-option> -->
                         <nz-option *ngFor="let item of admin | async" [nzLabel]="item.name"
                             [nzValue]="item.id"></nz-option>
                     </nz-select>

@@ -39,16 +39,16 @@
                 </ul>
             </li>
         </ul>
-   
+
     </nz-sider>
-    <nz-layout class="right-layout" [style.marginLeft]="isCollapsed ? '80px' : '200px'" >
+    <nz-layout class="right-layout" [style.marginLeft]="isCollapsed ? '80px' : '200px'">
         <!-- header -->
         <ng-container [ngTemplateOutlet]="header"></ng-container>
 
         <nz-content>
             <!-- Components -->
             <breadcrumb></breadcrumb>
-            
+
             <div class="inner-content">
                 <!-- body -->
                 <router-outlet></router-outlet>
@@ -65,6 +65,21 @@
     <nz-header>
         <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             (click)="isCollapsed = !isCollapsed"></span>
+
+        <ul nz-menu nzMode="horizontal">
+            <li nz-submenu nzPlacement="bottomRight" nzTitle="bottomRight" nzTitle="Admin" nzIcon="user">
+                <ul>
+                    <li>
+                        <ul>
+                            <li nz-menu-item routerLink="profile">Profile</li>
+                            <li nz-menu-item>
+                                Logout
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </nz-header>
 </ng-template>
 

@@ -1,0 +1,39 @@
+<h2>Promocodelar ro'yhati</h2>
+
+<div class="table-top">
+    <div class="left">
+     
+    </div>
+    <div class="right">
+       
+    </div>
+</div>
+
+<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #fixedTable nzTableLayout="fixed" [nzData]="promo ? promo : [] " [nzLoading]="loading">
+    <thead>
+        <tr>
+            <th nzWidth="50px">No</th>
+            <th nzCustomFilter>
+                Promo code
+            </th>
+            <th>Chegirma</th>
+            <th>Holati</th>
+            <th>Boshqaruv</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of fixedTable.data; index as i">
+            <td nzEllipsis>{{ i+1 }}</td>
+            <td>{{ data.code }}</td>
+            <td>{{ data.discount }}</td>
+            <td>{{ data.isActive }}</td>
+            <td>
+                <nz-button-group>
+                    <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
+                        <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                    </button>
+                </nz-button-group>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

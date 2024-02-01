@@ -71,7 +71,7 @@ export class PromoCodeDetailComponent {
 
   create() {
     this._promoCodeSrv
-      .create(this.form.value)
+      .create({...this.form.value})
       .pipe(
         catchError(({ error }) => {
           if (error?.statusCode == 409)

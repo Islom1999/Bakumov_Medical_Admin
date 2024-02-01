@@ -43,6 +43,9 @@ nz-sider {
 nz-header {
   background: #fff;
   padding: 0;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
 nz-content {

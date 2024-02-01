@@ -1,0 +1,48 @@
+<nz-tabset nzType="card">
+    <nz-tab nzTitle="Profile">
+        <ng-container *ngIf="!admin else admin_list">
+            <h2>Ma'lumotlar topilmadi</h2>
+        </ng-container>
+    </nz-tab>
+    <nz-tab nzTitle="Promocode">
+        <app-promocode-list></app-promocode-list>
+    </nz-tab>
+</nz-tabset>
+
+<ng-template #admin_list>
+    <h2>Sizning ma'lumotlariz</h2>
+    <nz-table [nzData]="[admin]" [nzFrontPagination]="false" [nzShowPagination]="false">
+        <thead>
+            <tr>
+                <th>Ism familiyasi</th>
+                <th>Telefoni</th>
+                <th>Email</th>
+                <th>Holat</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let admin of [admin]">
+            <tr>
+                <td>{{admin?.name}}</td>
+                <td>{{admin?.phone}}</td>
+                <td>{{admin?.email}}</td>
+                <td>{{admin?.isBlock ? "Blocked" : "UnBlocked"}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+    <h2>Rol ma'lumotlariz</h2>
+    <nz-table [nzData]="[admin?.role]" [nzFrontPagination]="false" [nzShowPagination]="false">
+        <thead>
+            <tr>
+                <th>Role nomi</th>
+                <th>Imkonyatlari</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let role of [admin?.role]">
+            <tr>
+                <td>{{role?.title}}</td>
+                <td>{{role?.permission | json}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-template>
