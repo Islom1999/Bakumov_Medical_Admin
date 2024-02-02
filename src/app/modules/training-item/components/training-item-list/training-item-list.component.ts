@@ -8,6 +8,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { HttpParams } from '@angular/common/http';
 import { Breadcrumb } from 'src/types/breadcrump';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-training-item-list',
@@ -35,8 +37,10 @@ export class TrainingItemListComponent extends BaseComponentList<ITrainingItem> 
     private _trainingSrv: TrainingService,
     private _messageSrv: NzMessageService,
     private _breadcrumbSrv: BreadcrumbsService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService, 
   ) {
-    super(_trainingItemSrv, _messageSrv, _breadcrumbSrv);
+    super(_trainingItemSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

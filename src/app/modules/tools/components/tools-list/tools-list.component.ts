@@ -6,6 +6,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { BaseComponentList } from 'src/app/base/components/base-list';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-tools-list',
@@ -31,9 +33,11 @@ export class ToolsListComponent extends BaseComponentList<ITools> implements OnI
   constructor(
     private _toolsSrv: ToolsService,
     private _messageSrv: NzMessageService,
-    private _breadcrumbSrv: BreadcrumbsService
+    private _breadcrumbSrv: BreadcrumbsService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService, 
   ){
-    super(_toolsSrv, _messageSrv, _breadcrumbSrv);
+    super(_toolsSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

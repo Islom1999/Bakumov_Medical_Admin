@@ -1,51 +1,77 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutsComponent } from './layouts.component';
+import { canActivatePermission } from '../shared/guards/permission-guard';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'profile',
+    pathMatch: 'full'
+  },
   {
     path: '',
     component: LayoutsComponent,
     children: [
       {
         path: 'role',
-        loadChildren: () => import('../modules/index').then((modules) => modules.RoleModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.RoleModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['role_view'] }
       },
       {
         path: 'admin',
-        loadChildren: () => import('../modules/index').then((modules) => modules.AdminModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.AdminModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['admin_view'] }
       },
       {
         path: 'article',
-        loadChildren: () => import('../modules/index').then((modules) => modules.ArticleModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.ArticleModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
       },
       {
         path: 'noticeable',
-        loadChildren: () => import('../modules/index').then((modules) => modules.NoticeableModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.NoticeableModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
       },
       {
         path: 'noticeable-item',
-        loadChildren: () => import('../modules/index').then((modules) => modules.NoticeableItemModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.NoticeableItemModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
       },
       {
         path: 'tools',
-        loadChildren: () => import('../modules/index').then((modules) => modules.ToolsModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.ToolsModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
       },
       {
         path: 'names',
-        loadChildren: () => import('../modules/index').then((modules) => modules.NamesModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.NamesModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
       },
       {
         path: 'possible',
-        loadChildren: () => import('../modules/index').then((modules) => modules.PossibleModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.PossibleModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
       },
       {
         path: 'possible-item',
-        loadChildren: () => import('../modules/index').then((modules) => modules.PossibleItemModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.PossibleItemModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
       },
       {
         path: 'training',
-        loadChildren: () => import('../modules/index').then((modules) => modules.TrainingModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.TrainingModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
       },
       // {
       //   path: 'training-item',
@@ -53,22 +79,34 @@ const routes: Routes = [
       // },
       {
         path: 'promo-code',
-        loadChildren: () => import('../modules/index').then((modules) => modules.PromoCodeModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.PromoCodeModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['promo_view'] }
       },
       {
         path: 'client',
-        loadChildren: () => import('../modules/index').then((modules) => modules.UserModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.UserModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['client_view'] }
       },
       {
         path: 'order',
-        loadChildren: () => import('../modules/index').then((modules) => modules.OrderModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.OrderModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['order_view'] }
       },
       {
         path: 'profile',
-        loadChildren: () => import('../modules/index').then((modules) => modules.ProfileModule)
+        loadChildren: () => import('../modules/index').then((modules) => modules.ProfileModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['profile_view'] }
       },
-    ]
-  }
+    ],
+  },
+  {
+    path: '**',
+    redirectTo: 'profile'
+  },
 ];
 
 @NgModule({

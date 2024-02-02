@@ -9,6 +9,8 @@ import { Breadcrumb } from 'src/types/breadcrump';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { AdminDetailComponent } from '../admin-detail/admin-detail.component';
 import { AdminInfoComponent } from '../admin-info/admin-info.component';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-admin-list',
@@ -32,15 +34,17 @@ export class AdminListComponent extends BaseComponentList<IAdmin> {
     _adminSrv: AdminService,
     _messageSrv: NzMessageService,
     _breadcrumbService: BreadcrumbsService,
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService,
   ){
-    super(_adminSrv, _messageSrv, _breadcrumbService)
+    super(_adminSrv, _messageSrv, _breadcrumbService, permissions, permissionService)
   }
 
   
 
   override ngOnInit(): void {
-    super.ngOnInit();
+    super.ngOnInit()
     this.admins$ = this.data$;
   }
 

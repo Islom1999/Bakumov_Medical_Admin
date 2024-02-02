@@ -3,6 +3,8 @@ import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { PromoCodeService } from 'src/app/modules/promo-code/service/promo-code.service';
 import { IPromoCode } from 'src/interfaces';
 import { PromocodeInfoComponent } from '../promocode-info/promocode-info.component';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-promocode-list',
@@ -18,7 +20,7 @@ export class PromocodeListComponent implements OnInit {
 
   constructor(
     private _promoSrv: PromoCodeService,  
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
   ){}
 
   ngOnInit(): void {

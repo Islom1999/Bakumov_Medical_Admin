@@ -5,6 +5,8 @@ import { NoticeableDetailComponent } from './components/noticeable-detail/notice
 import { BaseModule } from 'src/app/shared/modules';
 import { RouterModule, Routes } from '@angular/router';
 import { UploadImageDirective } from 'src/app/shared/directives/ng-image-upload.directive';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
 
 const router: Routes =  [
   {
@@ -13,11 +15,15 @@ const router: Routes =  [
   },
   {
     path: 'add',
-    component: NoticeableDetailComponent
+    component: NoticeableDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_create'] }
   },
   {
     path: 'update/:id',
-    component: NoticeableDetailComponent
+    component: NoticeableDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_update'] }
   }
 ] 
 

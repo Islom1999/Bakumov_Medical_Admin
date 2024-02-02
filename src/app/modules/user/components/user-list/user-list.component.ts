@@ -11,6 +11,8 @@ import { Breadcrumb } from 'src/types/breadcrump';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { UserUpdateComponent } from '../user-update/user-update.component';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-user-list',
@@ -40,9 +42,10 @@ export class UserListComponent
     private _messageSrv: NzMessageService,
     private _breadcrumbSrv: BreadcrumbsService,
     private drawerService: NzDrawerService,
-    
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService, 
   ) {
-    super(_userSrv, _messageSrv, _breadcrumbSrv);
+    super(_userSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

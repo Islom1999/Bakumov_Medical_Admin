@@ -6,6 +6,8 @@ import { TrainingService } from '../../service/training.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-training-list',
@@ -25,8 +27,14 @@ export class TrainingListComponent extends BaseComponentList<ITraining> {
     url: '/training'
   };
 
-  constructor(_trainingSrv: TrainingService, _messageSrv: NzMessageService, _breadcrumbSrv: BreadcrumbsService) {
-    super(_trainingSrv, _messageSrv, _breadcrumbSrv);
+  constructor(
+    _trainingSrv: TrainingService, 
+    _messageSrv: NzMessageService, 
+    _breadcrumbSrv: BreadcrumbsService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService, 
+  ) {
+    super(_trainingSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

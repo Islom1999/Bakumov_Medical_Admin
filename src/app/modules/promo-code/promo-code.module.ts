@@ -7,6 +7,7 @@ import { BaseModule } from 'src/app/shared/modules';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { PromoCodeInfoComponent } from './components/promo-code-info/promo-code-info.component';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
 
 const router: Routes =  [
   {
@@ -15,11 +16,15 @@ const router: Routes =  [
   },
   {
     path: 'add',
-    component: PromoCodeDetailComponent
+    component: PromoCodeDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['promo_create'] }
   },
   {
     path: 'update/:id',
-    component: PromoCodeDetailComponent
+    component: PromoCodeDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['promo_update'] }
   }
 ] 
 

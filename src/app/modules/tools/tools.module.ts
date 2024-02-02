@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaseModule } from 'src/app/shared/modules';
 import { UploadImageDirective } from 'src/app/shared/directives/ng-image-upload.directive';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
 
 const router: Routes =  [
   {
@@ -14,11 +15,15 @@ const router: Routes =  [
   },
   {
     path: 'add',
-    component: ToolsDetailComponent
+    component: ToolsDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_create'] }
   },
   {
     path: 'update/:id',
-    component: ToolsDetailComponent
+    component: ToolsDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_update'] }
   }
 ] 
 

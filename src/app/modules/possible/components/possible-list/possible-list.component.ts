@@ -6,6 +6,8 @@ import { IPossible } from 'src/interfaces';
 import { PossibleService } from '../../service/possible.service';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-possible-list',
@@ -19,8 +21,14 @@ export class PossibleListComponent extends BaseComponentList<IPossible> {
   searchValue = '';
   visible = false;
 
-  constructor(_possibleSrv: PossibleService, _messageSrv: NzMessageService, private _breadcrumbSrv: BreadcrumbsService) {
-    super(_possibleSrv, _messageSrv, _breadcrumbSrv);
+  constructor(
+    _possibleSrv: PossibleService, 
+    _messageSrv: NzMessageService, 
+    private _breadcrumbSrv: BreadcrumbsService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService,  
+  ) {
+    super(_possibleSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override breadcrumb: Breadcrumb = {

@@ -4,48 +4,50 @@
         <h2>Mashqlar ro'yhati</h2>
     </div>
     <div class="right">
-        <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
+        <a *ngxPermissionsOnly="['data_create']" nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
             <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
         </a>
     </div>
 </div>
 
-<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable [nzData]="(training$ | async) ?? []" [nzLoading]="(training$ | async) ? false : true">
-    <thead>
-        <tr>
-            <th nzWidth="50px">No</th>
-            <th nzCustomFilter>
-                Nomi
-                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-                    <button nz-button nzSize="large" >
-                        <span nz-icon nzType="search" style="color: blue;"></span>
-                    </button>
-                </nz-filter-trigger>
-            </th>
-            <!-- <th>Description</th> -->
-            <th>Boshqaruv</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of basicTable.data; index as i">
-            <td>{{ i+1 }}</td>
-            <td>{{ data.name }}</td>
-            <!-- <td nzEllipsis>{{ data.descr }}</td> -->
-            <td>
-                <nz-button-group>
-                    <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
-                        (nzOnConfirm)="delete(data.id)">
-                        <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
-                    </button>
-                    <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
-                        <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
-                    </a>
-                </nz-button-group>
-            </td>
-        </tr>
-    </tbody>
-</nz-table>
+<ng-container *ngxPermissionsOnly="['data_view']">
+    <nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable [nzData]="(training$ | async) ?? []" [nzLoading]="(training$ | async) ? false : true">
+        <thead>
+            <tr>
+                <th nzWidth="50px">No</th>
+                <th nzCustomFilter>
+                    Nomi
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                        <button nz-button nzSize="large" >
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
+                <!-- <th>Description</th> -->
+                <th>Boshqaruv</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data; index as i">
+                <td>{{ i+1 }}</td>
+                <td>{{ data.name }}</td>
+                <!-- <td nzEllipsis>{{ data.descr }}</td> -->
+                <td>
+                    <nz-button-group>
+                        <button *ngxPermissionsOnly="['data_delete']" nzType="default" nz-button nzSize="large" nz-popconfirm
+                            nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
+                            (nzOnConfirm)="delete(data.id)">
+                            <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                        </button>
+                        <a *ngxPermissionsOnly="['data_update']" [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
+                            <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                        </a>
+                    </nz-button-group>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-container>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <div class="ant-table-filter-dropdown">

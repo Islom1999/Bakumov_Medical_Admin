@@ -8,6 +8,8 @@ import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service'
 import { Breadcrumb } from 'src/types/breadcrump';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { RoleInfoComponent } from '../role-info/role-info.component';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-role-list',
@@ -31,9 +33,11 @@ export class RoleListComponent extends BaseComponentList<IRole> {
     _roleSrv: RoleService, 
     _messageSrv: NzMessageService, 
     _breadcrumbSrv: BreadcrumbsService,
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService, 
   ) {
-    super(_roleSrv, _messageSrv, _breadcrumbSrv);
+    super(_roleSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

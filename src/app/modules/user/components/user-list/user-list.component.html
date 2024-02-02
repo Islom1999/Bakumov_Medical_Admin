@@ -14,58 +14,61 @@
     </div>
 </div>
 
-<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #fixedTable nzTableLayout="fixed" [nzData]="(user$ | async) ?? []" [nzLoading]="loading">
-    <thead>
-        <tr>
-            <th nzWidth="50px">No</th>
-            <th nzCustomFilter>
-                Ism familiya
-                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-                    <button nz-button nzSize="large">
-                        <span nz-icon nzType="search" style="color: blue;"></span>
-                    </button>
-                </nz-filter-trigger>
-            </th>
-            <th>
-                Tel raqami
-                <nz-filter-trigger [(nzVisible)]="visiblePhone" [nzActive]="searchValuePhone.length > 0" [nzDropdownMenu]="menuPhone">
-                    <button nz-button nzSize="large" >
-                        <span nz-icon nzType="search" style="color: blue;"></span>
-                    </button>
-                </nz-filter-trigger>
-            </th>
-            <!-- <th>Username</th> -->
-            <th>Tug'ulgan sanasi</th>
-            <th>Holati</th>
-            <th>Premium turi</th>
-            <th>Premium sanasi</th>
-            <th>Boshqaruv</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of fixedTable.data; index as i">
-            <td nzEllipsis>{{ i+1 }}</td>
-            <td>{{ data.fullname ? data.fullname : "------------" }}</td>
-            <td>{{ data.phone }}</td>
-            <!-- <td>{{ data.username }}</td> -->
-            <td>{{ (data.date_of_birth | date : 'dd.mm.yyyy') ? (data.date_of_birth | date : 'dd.mm.yyyy') : "--------" }}</td>
-            <td>{{ data.isSuccess ? "Kirilgan" : "Kirilmagan" }}</td>
-            <td>{{ data.roleType }}</td>
-            <td>{{ (data.date_premium_active | date : 'dd.mm.yyyy') ?  (data.date_premium_active | date : 'dd.mm.yyyy') : "--------" }}</td>
-            <td>
-                <nz-button-group>
-                    <button nzType="default" nz-button nzSize="large" (click)="openUpdate(data.id!)">
-                        <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
-                    </button>
+<ng-container *ngxPermissionsOnly="['client_view']">
+    <nz-table [nzScroll]="{x: 'auto'}" nz-responsive #fixedTable nzTableLayout="fixed" [nzData]="(user$ | async) ?? []" [nzLoading]="loading">
+        <thead>
+            <tr>
+                <th nzWidth="50px">No</th>
+                <th nzCustomFilter>
+                    Ism familiya
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                        <button nz-button nzSize="large">
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
+                <th>
+                    Tel raqami
+                    <nz-filter-trigger [(nzVisible)]="visiblePhone" [nzActive]="searchValuePhone.length > 0" [nzDropdownMenu]="menuPhone">
+                        <button nz-button nzSize="large" >
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
+                <!-- <th>Username</th> -->
+                <th>Tug'ulgan sanasi</th>
+                <th>Holati</th>
+                <th>Premium turi</th>
+                <th>Premium sanasi</th>
+                <th>Boshqaruv</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of fixedTable.data; index as i">
+                <td nzEllipsis>{{ i+1 }}</td>
+                <td>{{ data.fullname ? data.fullname : "------------" }}</td>
+                <td>{{ data.phone }}</td>
+                <!-- <td>{{ data.username }}</td> -->
+                <td>{{ (data.date_of_birth | date : 'dd.mm.yyyy') ? (data.date_of_birth | date : 'dd.mm.yyyy') : "--------" }}</td>
+                <td>{{ data.isSuccess ? "Kirilgan" : "Kirilmagan" }}</td>
+                <td>{{ data.roleType }}</td>
+                <td>{{ (data.date_premium_active | date : 'dd.mm.yyyy') ?  (data.date_premium_active | date : 'dd.mm.yyyy') : "--------" }}</td>
+                <td>
+                    <nz-button-group>
+                        <button *ngxPermissionsOnly="['client_update']" nzType="default" nz-button nzSize="large" (click)="openUpdate(data.id!)">
+                            <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                        </button>
+    
+                        <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
+                            <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                        </button>
+                    </nz-button-group>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-container>
 
-                    <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
-                        <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
-                    </button>
-                </nz-button-group>
-            </td>
-        </tr>
-    </tbody>
-</nz-table>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <div class="ant-table-filter-dropdown">

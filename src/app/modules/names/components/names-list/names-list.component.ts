@@ -8,6 +8,8 @@ import { Gender } from 'src/enumerations';
 import { HttpParams } from '@angular/common/http';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-names-list',
@@ -32,9 +34,11 @@ export class NamesListComponent extends BaseComponentList<IName> implements OnIn
   constructor(
     private _nameSrv: NamesService,
     private _messageSrv: NzMessageService,
-    private _breadcrumbSrv: BreadcrumbsService  
+    private _breadcrumbSrv: BreadcrumbsService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService,    
   ) {
-    super(_nameSrv, _messageSrv, _breadcrumbSrv);
+    super(_nameSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

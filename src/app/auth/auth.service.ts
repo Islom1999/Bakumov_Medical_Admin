@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Login } from 'src/types/login.type';
 import { Tokens } from 'src/types/token.type';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root',
@@ -47,9 +48,23 @@ export class AuthService {
   }
 
   isAuthenticated(){
-    const token = this.getToken()
-    if (token.access_token && token.refresh_token) return true
-    else return false 
+    // const token = this.getToken()
+    // if (token.access_token && token.refresh_token) return true
+    // else return false 
+    try {
+      const token = this.getToken();
+      if (token.access_token && token.refresh_token) {
+        const decoded = jwtDecode(token.access_token);
+        const currentTime = Date.now() / 1000;
+
+        if ((decoded?.exp ?? 0) > currentTime) {
+          return true;
+        }
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
   }
 
   private setTokens(tokens: Tokens) {

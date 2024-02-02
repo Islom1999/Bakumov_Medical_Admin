@@ -4,55 +4,58 @@
         <h2>Adminlar ro'yhati</h2>
     </div>
     <div class="right">
-        <a nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
+        <a *ngxPermissionsOnly="['admin_create']" nz-button [routerLink]="['add']" nzType="primary" nzSearch nzSize="large">
             <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
         </a>
     </div>
 </div>
 
-<nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable [nzData]="(admins$ | async) ?? []" [nzLoading]="(admins$ | async) ? false : true">
-    <thead>
-        <tr>
-            <th nzWidth="50px">No</th>
-            <th nzCustomFilter>
-                Ism familiya
-                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-                    <button nz-button nzSize="large" >
-                        <span nz-icon nzType="search" style="color: blue;"></span>
-                    </button>
-                </nz-filter-trigger>
-            </th>
-            <th>Email</th>
-            <th>Telefon</th>
-            <th>Holati</th>
-            <th>Boshqaruv</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of basicTable.data; index as i">
-            <td >{{ i+1 }}</td>
-            <td>{{ data.name }}</td>
-            <td>{{ data.email }}</td>
-            <td>{{ data.phone }}</td>
-            <td>{{ data.isBlock ? "Blocked" : "UnBlocked" }}</td>
-            <td>
-                <nz-button-group>
-                    <button nzType="default" nz-button nzSize="large" nz-popconfirm
-                        nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
-                        (nzOnConfirm)="delete(data.id)">
-                        <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
-                    </button>
-                    <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
-                        <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
-                    </a>
-                    <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
-                        <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
-                    </button>
-                </nz-button-group>
-            </td>
-        </tr>
-    </tbody>
-</nz-table>
+<ng-container *ngxPermissionsOnly="['admin_view']">
+    <nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable [nzData]="(admins$ | async) ?? []" [nzLoading]="(admins$ | async) ? false : true">
+        <thead>
+            <tr>
+                <th nzWidth="50px">No</th>
+                <th nzCustomFilter>
+                    Ism familiya
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                        <button nz-button nzSize="large" >
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th>Holati</th>
+                <th>Boshqaruv</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data; index as i">
+                <td >{{ i+1 }}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.phone }}</td>
+                <td>{{ data.isBlock ? "Blocked" : "UnBlocked" }}</td>
+                <td>
+                    <nz-button-group>
+                        <button *ngxPermissionsOnly="['admin_delete']" nzType="default" nz-button nzSize="large" nz-popconfirm
+                            nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight" nz-button
+                            (nzOnConfirm)="delete(data.id)">
+                            <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                        </button>
+                        <a *ngxPermissionsOnly="['admin_update']" [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
+                            <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                        </a>
+                        <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
+                            <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                        </button>
+                    </nz-button-group>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-container>
+
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <div class="ant-table-filter-dropdown">

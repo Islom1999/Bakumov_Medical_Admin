@@ -4,6 +4,8 @@ import { PossibleListComponent } from './components/possible-list/possible-list.
 import { PossibleDetailComponent } from './components/possible-detail/possible-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseModule } from 'src/app/shared/modules';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
 
 const router: Routes =  [
   {
@@ -12,11 +14,15 @@ const router: Routes =  [
   },
   {
     path: 'add',
-    component: PossibleDetailComponent
+    component: PossibleDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_create'] }
   },
   {
     path: 'update/:id',
-    component: PossibleDetailComponent
+    component: PossibleDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_update'] }
   }
 ] 
 

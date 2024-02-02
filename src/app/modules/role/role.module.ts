@@ -7,6 +7,7 @@ import { BaseModule } from 'src/app/shared/modules';
 import { FormsModule } from '@angular/forms';
 import { RoleInfoComponent } from './components/role-info/role-info.component';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
 
 const router: Routes =  [
   {
@@ -15,11 +16,15 @@ const router: Routes =  [
   },
   {
     path: 'add',
-    component: RoleDetailComponent
+    component: RoleDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['role_create'] }
   },
   {
     path: 'update/:id',
-    component: RoleDetailComponent
+    component: RoleDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['role_update'] }
   }
 ] 
 

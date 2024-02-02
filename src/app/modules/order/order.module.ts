@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaseModule } from 'src/app/shared/modules';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 
 const router: Routes = [

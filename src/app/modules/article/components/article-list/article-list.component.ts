@@ -6,6 +6,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, of, switchMap, tap } from 'rxjs';
 import { Breadcrumb } from 'src/types/breadcrump';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-article-list',
@@ -28,9 +30,11 @@ export class ArticleListComponent extends BaseComponentList<IArticle> implements
   constructor(
     private _articleSrv: ArticleService,
     private _messageSrv: NzMessageService,  
-    private breadcrumbSrv: BreadcrumbsService  
+    private breadcrumbSrv: BreadcrumbsService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService,  
   ){
-    super(_articleSrv, _messageSrv, breadcrumbSrv);
+    super(_articleSrv, _messageSrv, breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

@@ -6,6 +6,8 @@ import { BaseModule } from 'src/app/shared/modules';
 import { RouterModule, Routes } from '@angular/router';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
 
 const router: Routes =  [
   {
@@ -14,11 +16,15 @@ const router: Routes =  [
   },
   {
     path: 'add',
-    component: NamesDetailComponent
+    component: NamesDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_create'] }
   },
   {
     path: 'update/:id',
-    component: NamesDetailComponent
+    component: NamesDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_update'] }
   }
 ] 
 

@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './shared/interceptors/token.interceptor';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 registerLocaleData(en);
 
@@ -25,6 +26,8 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

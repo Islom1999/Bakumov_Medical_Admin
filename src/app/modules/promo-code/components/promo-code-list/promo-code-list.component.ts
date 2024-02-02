@@ -11,6 +11,8 @@ import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service'
 import { Breadcrumb } from 'src/types/breadcrump';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { PromoCodeInfoComponent } from '../promo-code-info/promo-code-info.component';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-promo-code-list',
@@ -37,9 +39,11 @@ export class PromoCodeListComponent extends BaseComponentList<IPromoCode> {
     private _adminSrv: AdminService,
     private _messageSrv: NzMessageService,
     private _breadcrumbSrv: BreadcrumbsService,
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService,  
   ) {
-    super(_promoCodeSrv, _messageSrv, _breadcrumbSrv);
+    super(_promoCodeSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

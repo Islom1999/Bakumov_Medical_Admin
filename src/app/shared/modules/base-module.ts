@@ -12,11 +12,14 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NgxPermissionsModule } from "ngx-permissions";
 
 @NgModule({
     imports: [
         FormsModule,
         ReactiveFormsModule,
+        NgxPermissionsModule.forChild(),
+
 
         NzTableModule,
         NzDividerModule,
@@ -34,6 +37,7 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     exports: [
         FormsModule,
         ReactiveFormsModule,
+        NgxPermissionsModule,
 
         NzTableModule,
         NzDividerModule,

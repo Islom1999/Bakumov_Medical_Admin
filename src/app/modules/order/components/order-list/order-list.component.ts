@@ -8,6 +8,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { OrderDetailComponent } from '../order-detail/order-detail.component';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-order-list',
@@ -38,9 +40,11 @@ export class OrderListComponent extends BaseComponentList<IOrder> implements OnI
     private _orderSrv: OrderService,
     private _messageSrv: NzMessageService,  
     private breadcrumbSrv: BreadcrumbsService,
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService,  
   ){
-    super(_orderSrv, _messageSrv, breadcrumbSrv);
+    super(_orderSrv, _messageSrv, breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {

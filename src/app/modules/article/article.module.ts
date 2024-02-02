@@ -9,6 +9,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { UploadImageDirective } from 'src/app/shared/directives/ng-image-upload.directive';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
 
 
 const router: Routes =  [
@@ -18,11 +20,15 @@ const router: Routes =  [
   },
   {
     path: 'add',
-    component: ArticleDetailComponent
+    component: ArticleDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_create'] }
   },
   {
     path: 'update/:id',
-    component: ArticleDetailComponent
+    component: ArticleDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['data_update'] }
   }
 ] 
 

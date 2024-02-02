@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaseModule } from 'src/app/shared/modules';
 import { AdminInfoComponent } from './components/admin-info/admin-info.component';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
 
 const router: Routes =  [
   {
@@ -14,11 +16,15 @@ const router: Routes =  [
   },
   {
     path: 'add',
-    component: AdminDetailComponent
+    component: AdminDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['admin_create'] }
   },
   {
     path: 'update/:id',
-    component: AdminDetailComponent
+    component: AdminDetailComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['admin_update'] }
   }
 ] 
 

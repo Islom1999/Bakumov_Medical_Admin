@@ -6,6 +6,8 @@ import { INoticeable } from 'src/interfaces';
 import { NoticeableService } from '../../service/noticeable.service';
 import { BreadcrumbsService } from 'src/app/shared/services/breadcrumbs.service';
 import { Breadcrumb } from 'src/types/breadcrump';
+import { PermissionService } from 'src/app/shared/services/permission.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-noticeable-list',
@@ -25,8 +27,14 @@ export class NoticeableListComponent extends BaseComponentList<INoticeable> {
     url: '/noticeable'
   };
 
-  constructor(_noticeableSrv: NoticeableService, _messageSrv: NzMessageService, private _breadcrumbSrv: BreadcrumbsService) {
-    super(_noticeableSrv, _messageSrv, _breadcrumbSrv);
+  constructor(
+    _noticeableSrv: NoticeableService, 
+    _messageSrv: NzMessageService, 
+    private _breadcrumbSrv: BreadcrumbsService,
+    private permissions: PermissionService,
+    private permissionService: NgxPermissionsService,  
+  ) {
+    super(_noticeableSrv, _messageSrv, _breadcrumbSrv, permissions, permissionService);
   }
 
   override ngOnInit(): void {
