@@ -4,25 +4,25 @@
             <img src="/assets/images/logo.png" alt="">
         </div>
         <ul nz-menu nzTheme="dark" nzMode="inline">
-            <li nz-submenu nzTitle="Admins" nzIcon="user-switch">
+            <li *ngxPermissionsOnly="['admin_view','role_view', 'promo_view']" nz-submenu nzTitle="Admins" nzIcon="user-switch">
                 <ul>
-                    <li nz-menu-item routerLink="admin">Adminlar</li>
-                    <li nz-menu-item routerLink="role">Rollar</li>
-                    <li nz-menu-item routerLink="promo-code">Promo-code</li>
+                    <li *ngxPermissionsOnly="['admin_view']" nz-menu-item routerLink="admin">Adminlar</li>
+                    <li *ngxPermissionsOnly="['role_view']" nz-menu-item routerLink="role">Rollar</li>
+                    <li *ngxPermissionsOnly="['promo_view']" nz-menu-item routerLink="promo-code">Promo-code</li>
                 </ul>
             </li>
-            <li nz-submenu nzTitle="Maqolalar" nzIcon="form">
+            <li *ngxPermissionsOnly="['data_view']" nz-submenu nzTitle="Maqolalar" nzIcon="form">
                 <ul>
                     <li nz-menu-item routerLink="article">Maqolalar</li>
                 </ul>
             </li>
-            <li nz-submenu nzTitle="Muhim ma'limotlar" nzIcon="profile">
+            <li *ngxPermissionsOnly="['data_view']" nz-submenu nzTitle="Muhim ma'limotlar" nzIcon="profile">
                 <ul>
                     <li nz-menu-item routerLink="noticeable">Muhim bo'limlar</li>
                     <li nz-menu-item routerLink="noticeable-item">Muhim malumotlar</li>
                 </ul>
             </li>
-            <li nz-submenu nzTitle="Yordamchilar" nzIcon="schedule">
+            <li *ngxPermissionsOnly="['data_view']" nz-submenu nzTitle="Yordamchilar" nzIcon="schedule">
                 <ul>
                     <li nz-menu-item routerLink="tools">Yordamchilar</li>
                     <li nz-menu-item routerLink="names">Ismlar</li>
@@ -32,10 +32,10 @@
                     <!-- <li nz-menu-item routerLink="training-item">Training Item - (Mashqlar bo'limlari)</li> -->
                 </ul>
             </li>
-            <li nz-submenu nzTitle="Foydalanuvchilar" nzIcon="solution">
+            <li *ngxPermissionsOnly="['order_view','client_view']" nz-submenu nzTitle="Foydalanuvchilar" nzIcon="solution">
                 <ul>
-                    <li nz-menu-item routerLink="client">Foydalanuvchilar</li>
-                    <li nz-menu-item routerLink="order">Orderlar</li>
+                    <li *ngxPermissionsOnly="['client_view']" nz-menu-item routerLink="client">Foydalanuvchilar</li>
+                    <li *ngxPermissionsOnly="['order_view']" nz-menu-item routerLink="order">Orderlar</li>
                 </ul>
             </li>
         </ul>

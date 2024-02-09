@@ -7,6 +7,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { BreadcurmbComponent } from './components/breadcurmb/breadcurmb.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [
@@ -16,11 +17,12 @@ import { BreadcurmbComponent } from './components/breadcurmb/breadcurmb.componen
   imports: [
     CommonModule,
     LayoutsRoutingModule,
+    NgxPermissionsModule,
 
     NzLayoutModule,
     NzBreadCrumbModule,
     NzIconModule,
-    NzMenuModule
+    NzMenuModule,
   ]
 })
 export class LayoutsModule { }
