@@ -49,10 +49,10 @@
                 <td>{{ data.fullname ? data.fullname : "------------" }}</td>
                 <td>{{ data.phone }}</td>
                 <!-- <td>{{ data.username }}</td> -->
-                <td>{{ (data.date_of_birth | date : 'dd.mm.yyyy') ? (data.date_of_birth | date : 'dd.mm.yyyy') : "--------" }}</td>
+                <td>{{ (data.date_of_birth | date : 'dd.MM.yyyy') ? (data.date_of_birth | date : 'dd.MM.yyyy') : "--------" }}</td>
                 <td>{{ data.isSuccess ? "Kirilgan" : "Kirilmagan" }}</td>
                 <td>{{ data.roleType }}</td>
-                <td>{{ (data.date_premium_active | date : 'dd.mm.yyyy') ?  (data.date_premium_active | date : 'dd.mm.yyyy') : "--------" }}</td>
+                <td>{{ (data.date_premium_active | date : 'dd.MM.yyyy') ?  (data.date_premium_active | date : 'dd.MM.yyyy') : "--------" }}</td>
                 <td>
                     <nz-button-group>
                         <button *ngxPermissionsOnly="['client_update']" nzType="default" nz-button nzSize="large" (click)="openUpdate(data.id!)">

@@ -13,7 +13,10 @@ import { jwtDecode } from "jwt-decode";
 export class AuthService {
   url = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   login(data: Login) {
     return this.http
@@ -38,6 +41,11 @@ export class AuthService {
           }
         })
       );
+  }
+
+  logout() {
+    localStorage.clear();
+    return this.router.navigate(['/login'])
   }
 
   getToken() {

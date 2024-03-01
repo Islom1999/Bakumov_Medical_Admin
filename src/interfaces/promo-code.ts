@@ -1,5 +1,6 @@
 import { IAdmin } from "./admin";
 import { IOrder } from "./order";
+import { ITotal } from "./total";
 
 export interface IPromoCode{
     id?: string;
@@ -10,4 +11,5 @@ export interface IPromoCode{
 
     admin: IAdmin
     order: IOrder[]
+    total: ITotal
 }   
