@@ -1,0 +1,70 @@
+<h2>Playlistlar ro'yhati</h2>
+
+<div class="table-top">
+    <div class="left">
+        <div class="left" *ngxPermissionsOnly="['data_view']">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a parent" [(ngModel)]="playlistId" 
+            (ngModelChange)="filterParent($event)">
+                <nz-option [nzLabel]="item.title" [nzValue]="item.id" *ngFor="let item of playlist | async"></nz-option>
+            </nz-select>
+        </div>
+    </div>
+    <div class="right">
+        <a *ngxPermissionsOnly="['data_create']" nz-button [routerLink]="['add']" nzType="primary" nzSearch
+            nzSize="large">
+            <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        </a>
+    </div>
+</div>
+
+<ng-container *ngxPermissionsOnly="['data_view']">
+    <nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable [nzData]="(video$ | async) ?? []"
+        [nzLoading]="(video$ | async) ? false : true">
+        <thead>
+            <tr>
+                <th nzWidth="50px">No</th>
+                <th nzCustomFilter>
+                    Nomi
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
+                        [nzDropdownMenu]="menu">
+                        <button nz-button nzSize="large">
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
+                <th>Video uzunligi</th>
+                <th>Boshqaruv</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data; index as i">
+                <td>{{ i+1 }}</td>
+                <td>{{ data.title }}</td>
+                <td>{{ data.time }}s</td>
+                <td>
+                    <nz-button-group>
+                        <button *ngxPermissionsOnly="['data_delete']" nzType="default" nz-button nzSize="large"
+                            nz-popconfirm nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?"
+                            nzPopconfirmPlacement="topRight" nz-button (nzOnConfirm)="delete(data.id)">
+                            <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                        </button>
+                        <a *ngxPermissionsOnly="['data_update']" [routerLink]="['update', data.id]" nzType="default"
+                            nz-button nzSize="large">
+                            <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                        </a>
+                    </nz-button-group>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-container>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

@@ -44,6 +44,18 @@ const routes: Routes = [
         data: { permissions: ['data_view'] }
       },
       {
+        path: 'playlist',
+        loadChildren: () => import('../modules/index').then((modules) => modules.PlaylistModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
+      },
+      {
+        path: 'video',
+        loadChildren: () => import('../modules/index').then((modules) => modules.VideoModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
+      },
+      {
         path: 'tools',
         loadChildren: () => import('../modules/index').then((modules) => modules.ToolsModule),
         canActivate: [canActivatePermission],
