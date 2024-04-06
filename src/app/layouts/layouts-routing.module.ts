@@ -96,6 +96,12 @@ const routes: Routes = [
         data: { permissions: ['promo_view'] }
       },
       {
+        path: 'premium',
+        loadChildren: () => import('../modules/index').then((modules) => modules.PremiumModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['admin_view'] }
+      },
+      {
         path: 'client',
         loadChildren: () => import('../modules/index').then((modules) => modules.UserModule),
         canActivate: [canActivatePermission],

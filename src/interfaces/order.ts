@@ -1,3 +1,4 @@
+import { IPremium } from "./premium";
 import { IPromoCode } from "./promo-code";
 import { IUser } from "./user";
 
@@ -20,13 +21,6 @@ export interface IOrder{
     paymentList:IPayment[]
 }   
 
-
-export interface IPremium{
-    id?: string;
-    name: string;
-    price: number;
-    month: string;
-}   
 
 export interface IPayment{
     id?: string;
