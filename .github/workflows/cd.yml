@@ -27,5 +27,5 @@ jobs:
           git pull
           npm install
           ng build
-          sudo rsync -av --delete /root/Bakumov_Medical_Admin/dist/bakumov-medical-admin/ /var/www/bakumov-medical-admin-v2/
+          sudo rsync -av --delete /root/Bakumov_Medical/Bakumov_Medical_Admin/dist/bakumov-medical-admin/ /var/www/bakumov-medical-admin-v2/
           
