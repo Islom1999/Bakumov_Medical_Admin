@@ -23,7 +23,7 @@ jobs:
         username: ${{ env.SERVER_USERNAME }}
         key: ${{ env.SSH_PRIVATE_KEY }}
         script: |
-          cd ~/Bakumov_Medical_Admin/
+          cd ~/Bakumov_Medical/Bakumov_Medical_Admin/
           git pull
           npm install
           ng build
