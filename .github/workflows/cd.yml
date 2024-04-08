@@ -2,7 +2,7 @@ name: Test CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ v2_2.0.0 ]
 
 env:
   SERVER_HOST: 91.200.151.163
@@ -27,5 +27,5 @@ jobs:
           git pull
           npm install
           ng build
-          sudo rsync -av --delete /root/Bakumov_Medical_Admin/dist/bakumov-medical-admin/ /var/www/bakumov-medical-admin/
+          sudo rsync -av --delete /root/Bakumov_Medical_Admin/dist/bakumov-medical-admin/ /var/www/bakumov-medical-admin-v2/
           
