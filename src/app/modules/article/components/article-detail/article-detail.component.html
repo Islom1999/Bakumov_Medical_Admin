@@ -35,10 +35,19 @@
             </nz-form-item>
 
             <nz-form-item>
-                <nz-form-label [nzSpan]="7" nzRequired>Role type</nz-form-label>
+                <nz-form-label [nzSpan]="7" nzRequired>Role turi</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
                     <nz-select nzPlaceHolder="Please select" formControlName="roleType">
                         <nz-option *ngFor="let item of roleTypes" [nzLabel]="item" [nzValue]="item"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Status turi</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
+                    <nz-select nzPlaceHolder="Please select" formControlName="serviceType">
+                        <nz-option *ngFor="let item of serviceType" [nzLabel]="item" [nzValue]="item"></nz-option>
                     </nz-select>
                 </nz-form-control>
             </nz-form-item>

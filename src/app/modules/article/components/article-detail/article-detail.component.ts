@@ -8,6 +8,7 @@ import { catchError, of, tap } from 'rxjs';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ImageService } from 'src/app/shared/services/image.service';
 import { BaseImageUpload } from 'src/app/base/components/base-upload-image';
+import { ServiceType } from 'src/enumerations/serviceType';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { BaseImageUpload } from 'src/app/base/components/base-upload-image';
 export class ArticleDetailComponent extends BaseImageUpload {
   public Editor = ClassicEditor;
   roleTypes: RoleType[] = Object.values(RoleType);
+  serviceType: ServiceType[] = Object.values(ServiceType);
   loading = true;
   form: FormGroup = new FormGroup({});
   
@@ -39,6 +41,7 @@ export class ArticleDetailComponent extends BaseImageUpload {
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),
       descr: new FormControl('', [Validators.required]),
+      serviceType: new FormControl('', [Validators.required]),
       roleType: new FormControl('', [Validators.required]),
     });
 
