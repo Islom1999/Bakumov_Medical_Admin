@@ -50,6 +50,23 @@
             </nz-form-item>
 
             <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Status turi</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your permision!">
+                    <nz-select 
+                        [nzMaxTagCount]="3" 
+                        [nzMaxTagPlaceholder]="tagPlaceHolder" 
+                        nzMode="multiple"
+                        nzPlaceHolder="Please select" 
+                        [(ngModel)]="listOfSelectedValue"
+                        formControlName="serviceType"
+                    >
+                        <nz-option *ngFor="let item of serviceType" [nzLabel]="item" [nzValue]="item"></nz-option>
+                    </nz-select>
+                    <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
                 <nz-form-control [nzOffset]="7" [nzSpan]="12">
                     <button nz-button nzType="primary" [disabled]="disableBtn">{{id ? "Update" : "Create"}}</button>
                     <button nz-button>

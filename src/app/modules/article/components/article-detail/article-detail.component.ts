@@ -22,6 +22,7 @@ export class ArticleDetailComponent extends BaseImageUpload {
   serviceType: ServiceType[] = Object.values(ServiceType);
   loading = true;
   form: FormGroup = new FormGroup({});
+  listOfSelectedValue = []
   
   get id() {
     return this.route.snapshot.params['id'];

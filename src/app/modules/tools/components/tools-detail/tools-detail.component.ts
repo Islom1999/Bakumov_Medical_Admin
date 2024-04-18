@@ -9,6 +9,7 @@ import { ITools } from 'src/interfaces';
 import { Observable, catchError, of } from 'rxjs';
 import { ToolsType } from 'src/enumerations/toolsType';
 import { RoleType } from 'src/enumerations';
+import { ServiceType } from 'src/enumerations/serviceType';
 
 @Component({
   selector: 'app-tools-detail',
@@ -18,9 +19,11 @@ import { RoleType } from 'src/enumerations';
 export class ToolsDetailComponent extends BaseImageUpload {
   toolsType: ToolsType[] = Object.values(ToolsType);
   roleType: RoleType[] = Object.values(RoleType);
+  serviceType: ServiceType[] = Object.values(ServiceType);
   noticeable: Observable<ITools[]> = of([]);
   loading = true;
   form: FormGroup = new FormGroup({});
+  listOfSelectedValue = []
   
   get id() {
     return this.route.snapshot.params['id'];
@@ -41,6 +44,7 @@ export class ToolsDetailComponent extends BaseImageUpload {
       name: new FormControl('', [Validators.required]),
       toolsType: new FormControl('', [Validators.required]),
       roleType: new FormControl('', [Validators.required]),
+      serviceType: new FormControl('', [Validators.required]),
     });
 
     if (this.id) {
@@ -95,12 +99,13 @@ export class ToolsDetailComponent extends BaseImageUpload {
   }
 
   update(id: string) {
-    const {name, roleType} = this.form.value
+    const {name, roleType, serviceType} = this.form.value
     this._toolsSrv
       .update(id, {
         name, 
         roleType, 
         icon: this.image,
+        serviceType
       })
       .pipe(
         catchError(({ error }) => {

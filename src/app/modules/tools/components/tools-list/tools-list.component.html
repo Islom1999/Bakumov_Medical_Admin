@@ -28,6 +28,7 @@
                     </nz-filter-trigger>
                 </th>
                 <th>Role turi</th>
+                <th>Service turi</th>
                 <th>Xizmat turi</th>
                 <th>Boshqaruv</th>
             </tr>
@@ -37,6 +38,7 @@
                 <td>{{ i+1 }}</td>
                 <td>{{ data.name }}</td>
                 <td>{{ data.roleType }}</td>
+                <td>{{ data.serviceType | json }}</td>
                 <td>{{ data.toolsType }}</td>
                 <td>
                     <nz-button-group>
