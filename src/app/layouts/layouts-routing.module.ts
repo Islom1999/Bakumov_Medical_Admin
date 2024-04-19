@@ -80,6 +80,24 @@ const routes: Routes = [
         data: { permissions: ['data_view'] }
       },
       {
+        path: 'tale',
+        loadChildren: () => import('../modules/index').then((modules) => modules.TaleModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
+      },
+      {
+        path: 'test',
+        loadChildren: () => import('../modules/index').then((modules) => modules.TestModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
+      },
+      {
+        path: 'vaccine',
+        loadChildren: () => import('../modules/index').then((modules) => modules.VaccineModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
+      },
+      {
         path: 'training',
         loadChildren: () => import('../modules/index').then((modules) => modules.TrainingModule),
         canActivate: [canActivatePermission],

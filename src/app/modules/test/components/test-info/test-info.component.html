@@ -1,0 +1,52 @@
+<h2>Savollar ma'lumotlari</h2>
+<nz-table [nzData]="[test]" #testTable [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Savol</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let data of testTable.data">
+        <tr>
+            <td>{{data?.quession}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<div class="table-top">
+    <h2>Ismlar ro'yhati</h2>
+
+    <div class="right">
+        <button nzType="primary" nz-button nzSize="large" (click)="open()">
+            <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        </button>
+    </div>
+</div>
+<nz-table [nzData]="test?.test_answer ?? []" #testAnswerTable [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Javob</th>
+            <th>Boshqaruv</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let data of testAnswerTable.data">
+        <tr>
+            <td>
+                <nz-tag [nzColor]="data.isTrue ? 'success' : 'error'">
+                {{data.answer}}
+                </nz-tag>
+            </td>
+            <td>
+                <nz-button-group>
+                    <button *ngxPermissionsOnly="['data_delete']" nzType="default" nz-button nzSize="large"
+                        nz-popconfirm nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?"
+                        nzPopconfirmPlacement="topRight" nz-button (nzOnConfirm)="delete(data.id)">
+                        <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                    </button>
+                    <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
+                        <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                    </button>
+                </nz-button-group>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
