@@ -7,6 +7,7 @@ export interface IUser{
     fullname: string;
     username: string;
     phone: number;
+    email: string;
     date_of_birth: Date;
     roleType: RoleType;
     date_premium_active: Date;

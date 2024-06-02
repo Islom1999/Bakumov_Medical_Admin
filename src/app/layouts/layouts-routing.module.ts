@@ -103,6 +103,12 @@ const routes: Routes = [
         canActivate: [canActivatePermission],
         data: { permissions: ['data_view'] }
       },
+      {
+        path: 'message',
+        loadChildren: () => import('../modules/index').then((modules) => modules.MessageModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
+      },
       // {
       //   path: 'training-item',
       //   loadChildren: () => import('../modules/index').then((modules) => modules.TrainingItemModule)

@@ -1,0 +1,88 @@
+<div class="table-top">
+    <div class="left">
+        <h2>Maqolalar ro'yhati</h2>
+    </div>
+    <div class="right">
+        <a *ngxPermissionsOnly="['data_create']" nz-button [routerLink]="['add']" nzType="primary" nzSearch
+            nzSize="large">
+            <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        </a>
+    </div>
+</div>
+
+<ng-container *ngxPermissionsOnly="['data_view']">
+    <nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable nzTableLayout="fixed"
+        [nzData]="(message$ | async) ?? []" [nzLoading]="loading">
+        <thead>
+            <tr>
+                <th nzWidth="50px">No</th>
+                <th nzCustomFilter>
+                    Xabar
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
+                        [nzDropdownMenu]="menu">
+                        <button nz-button nzSize="large">
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
+                <th nzCustomFilter>
+                    Qabul qiluvchilar turi
+                    <nz-filter-trigger [(nzVisible)]="visibleSending" [nzActive]="searchSending.length > 0" [nzDropdownMenu]="menuSending">
+                        <button nz-button nzSize="large" >
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
+                <!-- <th>Yaratuvchi</th> -->
+                <th>Qabul qiluvchi user</th>
+                <th>Boshqaruv</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data; index as i">
+                <td>{{ i+1 }}</td>
+                <td>{{ data.title }}</td>
+                <td>{{ data.sending_by }}</td>
+                <!-- <td>{{ data.created_by }}</td> -->
+                <td>{{ data?.user ? data?.user?.fullname : "Barcha foydalanuvchilar"  }}</td>
+                <td>
+                    <nz-button-group>
+                        <button *ngxPermissionsOnly="['data_delete']" nzType="default" nz-button nzSize="large"
+                            nz-popconfirm nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?"
+                            nzPopconfirmPlacement="topRight" nz-button (nzOnConfirm)="delete(data.id)">
+                            <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                        </button>
+                        <a *ngxPermissionsOnly="['data_update']" [routerLink]="['update', data.id]" nzType="default"
+                            nz-button nzSize="large">
+                            <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                        </a>
+                    </nz-button-group>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-container>
+
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #menuSending="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <nz-select style="display: block; margin-bottom: 10px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="searchSending">
+                <nz-option nzLabel="Barchaga" [nzValue]="'all'"></nz-option>
+                <nz-option nzLabel="Bittaga" [nzValue]="'one'"></nz-option>
+            </nz-select>
+            <button nz-button nzSize="small" nzType="primary" (click)="searchSendingBy()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetSendingBy()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

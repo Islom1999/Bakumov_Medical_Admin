@@ -48,6 +48,11 @@
                     <li *ngxPermissionsOnly="['order_view']" nz-menu-item routerLink="order">Orderlar</li>
                 </ul>
             </li>
+            <li *ngxPermissionsOnly="['data_view']" nz-submenu nzTitle="Xabarlar" nzIcon="message">
+                <ul>
+                    <li *ngxPermissionsOnly="['data_view']" nz-menu-item routerLink="message">Xabarlar</li>
+                </ul>
+            </li>
         </ul>
 
     </nz-sider>

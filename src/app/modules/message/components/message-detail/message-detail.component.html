@@ -1,0 +1,52 @@
+<div class="content-container">
+    <nz-spin class="nz-spin" [nzSpinning]="loading">
+        <h2 class="form-title">{{id ? "Xabarni o'gartirish" : "Xabar qo'shish"}}</h2>
+
+        <form nz-form [formGroup]="form" (submit)="submit()">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Title</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
+                    <input nz-input placeholder="Name" formControlName="title" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Batafsil xabar</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." nzErrorTip="Please input">
+                    <div class="content" role="main">
+                        <textarea nz-input formControlName="body"></textarea>
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Foydalanuvchi</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
+                    <nz-select 
+                        nzShowSearch
+                        nzAllowClear
+                        nzPlaceHolder="Please select" 
+                        formControlName="userId" 
+                    >
+                        <nz-option 
+                            *ngFor="let item of  user$ | async" 
+                            [nzLabel]="item.fullname 
+                                + (item?.phone? (' - (' + item?.phone) : ' - ( ---- ' )
+                                + (item?.email ? ') - (' + item?.email + ')' : ')')" 
+                            [nzValue]="item.id"
+                        ></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                    <button nz-button nzType="primary">{{id ? "Update" : "Create"}}</button>
+                    <button nz-button>
+                        <a routerLink="/message">Back</a>
+                    </button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </nz-spin>
+</div>
