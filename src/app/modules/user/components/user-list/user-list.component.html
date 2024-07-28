@@ -35,6 +35,14 @@
                         </button>
                     </nz-filter-trigger>
                 </th>
+                <th nzCustomFilter>
+                    Email
+                    <nz-filter-trigger [(nzVisible)]="visibleEmail" [nzActive]="searchValueEmail.length > 0" [nzDropdownMenu]="menuEmail">
+                        <button nz-button nzSize="large">
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
                 <!-- <th>Username</th> -->
                 <th>Tug'ulgan sanasi</th>
                 <th>Holati</th>
@@ -48,7 +56,7 @@
                 <td nzEllipsis>{{ i+1 }}</td>
                 <td>{{ data.fullname ? data.fullname : "------------" }}</td>
                 <td>{{ data.phone }}</td>
-                <!-- <td>{{ data.username }}</td> -->
+                <td>{{ data.email }}</td>
                 <td>{{ (data.date_of_birth | date : 'dd.MM.yyyy') ? (data.date_of_birth | date : 'dd.MM.yyyy') : "--------" }}</td>
                 <td>{{ data.isSuccess ? "Kirilgan" : "Kirilmagan" }}</td>
                 <td>{{ data.roleType }}</td>
@@ -86,6 +94,16 @@
             <input type="number" nz-input placeholder="Search phone" [(ngModel)]="searchValuePhone" />
             <button nz-button nzSize="small" nzType="primary" (click)="searchPhone()" class="search-button">Search</button>
             <button nz-button nzSize="small" (click)="resetPhone()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #menuEmail="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValueEmail" />
+            <button nz-button nzSize="small" nzType="primary" (click)="searchEmail()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="resetEmail()">Reset</button>
         </div>
     </div>
 </nz-dropdown-menu>

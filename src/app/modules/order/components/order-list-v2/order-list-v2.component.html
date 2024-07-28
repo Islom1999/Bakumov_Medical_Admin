@@ -1,0 +1,76 @@
+<div class="table-top">
+    <div class="left">
+        <h2>Buyutrmalar ro'yhati</h2>
+    </div>
+    <div class="right">
+    </div>
+</div>
+
+<ng-container>
+    <nz-table [nzScroll]="{x: 'auto'}" nz-responsive #basicTable [nzData]="(orders$ | async) ?? []"
+        [nzLoading]="(orders$ | async) ? false : true">
+        <thead>
+            <tr>
+                <th nzWidth="50px">No</th>
+                <th nzCustomFilter>
+                    TID
+                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0"
+                        [nzDropdownMenu]="menu">
+                        <button nz-button nzSize="large">
+                            <span nz-icon nzType="search" style="color: blue;"></span>
+                        </button>
+                    </nz-filter-trigger>
+                </th>
+                <th>Narxi</th>
+                <!-- <th>Chegirma</th> -->
+                <th>Status</th>
+                <th>Tarif</th>
+                <th>User</th>
+                <th>Boshqaruv</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data; index as i">
+                <td>{{ i+1 }}</td>
+                <td>{{ data.tid }}</td>
+                <td>{{ data.price }}</td>
+                <!-- <td>{{ data.discount }}</td> -->
+                <td>{{ data.success }}</td>
+                <td>{{ data?.premium?.name }}</td>
+                <td>{{ data?.user?.fullname }}</td>
+           
+                <td>
+                    <nz-button-group>
+                        <!-- <button nzType="default" nz-button nzSize="large" nz-popconfirm
+                            nzPopconfirmTitle="Ushbu m'alumotni o'chirmoqchimisiz?" nzPopconfirmPlacement="topRight"
+                            nz-button (nzOnConfirm)="delete(data.id)">
+                            <span nz-icon nzType="delete" nzTheme="outline" style="color: red;"></span>
+                        </button>
+                        <a [routerLink]="['update', data.id]" nzType="default" nz-button nzSize="large">
+                            <span nz-icon nzType="edit" nzTheme="outline" style="color: blue;"></span>
+                        </a> -->
+
+                        <button nzType="default" nz-button nzSize="large" (click)="open1(data.id!)">
+                            <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                            v1
+                        </button>
+                        <button nzType="default" nz-button nzSize="large" (click)="open2(data.id!)">
+                            <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                            v2
+                        </button>
+                    </nz-button-group>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</ng-container>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

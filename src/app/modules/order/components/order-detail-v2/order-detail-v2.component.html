@@ -1,0 +1,70 @@
+
+<h2>Foydalanuvchi ma'lumotlari</h2>
+<nz-table [nzData]="[order?.user]" [nzFrontPagination]="false" nz-responsive [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Ism familiya</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Premium sanasi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ order?.user?.fullname}}</td>
+            <td>{{ order?.user?.phone ? order?.user?.phone: '-----' }}</td>
+            <td>{{ order?.user?.email ? order?.user?.email : '-----' }}</td>
+            <td>{{ order?.user?.serviceType }}</td>
+            <td>{{ order?.user?.date_premium_active  ? (order?.user?.date_premium_active | date) : '-----'}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<h2>Tarif ma'lumotlari</h2>
+<nz-table [nzData]="[order?.premium]" [nzFrontPagination]="false" nz-responsive [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>Nomi</th>
+            <th>Narxi</th>
+            <th>Muddati</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ order?.premium?.name }}</td>
+            <td>{{ order?.premium?.price }}</td>
+            <td>{{ order?.premium?.month }}</td>
+            <td>{{ order?.premium?.isActive ? 'Active' : 'Bloklangan' }}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<h2>To'lov ma'lumotlari</h2>
+<nz-table [nzData]="[order?.transactions || []]" [nzFrontPagination]="false" nz-responsive [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>To'lov kodi</th>
+            <th>Turi</th>
+            <th>Narxi</th>
+            <th>Status</th>
+            <th>To'langan sana</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of (order?.transactions || []); index as i">
+            <td>{{ data.trans_id }}</td>
+            <td>{{ data.provider }}</td>
+            <td>{{ data.amount / 100 }}</td>
+            <td>
+                <nz-tag [nzColor]="data.status == 'PAID' ? '#87d068': '#f50'">{{ data.status }}</nz-tag>
+            </td>
+            <td>{{ data.perform_time ? (data.perform_time | date) : '-----' }}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+

@@ -70,11 +70,14 @@
                 <td>{{ data.discount }}</td>
                 <td>{{ data.createdAt | date : 'dd.MM.YYYY' }}</td>
                 <td>
-                    <nz-button-group>
-                        <button nzType="default" nz-button nzSize="large" (click)="open(data.id!)">
-                            <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
-                        </button>
-                    </nz-button-group>
+                    <button nzType="default" nz-button nzSize="large" (click)="open1(data.id!)">
+                        <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                        v1
+                    </button>
+                    <button nzType="default" nz-button nzSize="large" (click)="open2(data.id!)">
+                        <span nz-icon nzType="folder-open" nzTheme="outline" style="color: blue;"></span>
+                        v2
+                    </button>
                 </td>
             </tr>
         </tbody>

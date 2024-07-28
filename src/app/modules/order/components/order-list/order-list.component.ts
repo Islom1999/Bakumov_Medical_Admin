@@ -10,6 +10,7 @@ import { OrderDetailComponent } from '../order-detail/order-detail.component';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { PermissionService } from 'src/app/shared/services/permission.service';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { OrderDetailV2Component } from '../order-detail-v2/order-detail-v2.component';
 
 @Component({
   selector: 'app-order-list',
@@ -141,13 +142,24 @@ export class OrderListComponent extends BaseComponentList<IOrder> implements OnI
     );
   }
 
-  open(id:string): void {
+  open1(id:string): void {
     this.drawerService.create<OrderDetailComponent, { id: string }, string>({
-      nzTitle: 'To\'liq ma\'lumotlari',
+      nzTitle: 'Order premium ma\'lumotlari',
       nzContent: OrderDetailComponent,
       nzSize: 'large',
       nzContentParams: {
-        id: id
+        id: id,
+      }
+    });
+  }
+
+  open2(id:string): void {
+    this.drawerService.create<OrderDetailV2Component, { id: string }, string>({
+      nzTitle: 'Order premium ma\'lumotlari',
+      nzContent: OrderDetailV2Component,
+      nzSize: 'large',
+      nzContentParams: {
+        id: id,
       }
     });
   }

@@ -28,8 +28,10 @@ export class UserListComponent
   // Serch variables
   searchValue = '';
   searchValuePhone = ''
+  searchValueEmail = ''
   visible = false;
   visiblePhone = false;
+  visibleEmail = false;
 
   override breadcrumb: Breadcrumb = {
     header: "Foydalanuvchilar", 
@@ -68,6 +70,11 @@ export class UserListComponent
     this.searchPhone();
   }
 
+  resetEmail(): void {
+    this.searchValueEmail = '';
+    this.searchEmail();
+  }
+
   // Search function
   search(): void {
     this.visible = false;
@@ -90,14 +97,34 @@ export class UserListComponent
       switchMap((item) =>
         of(
           item.filter((user) =>
+            user?.phone ?
             user?.phone
               .toString()
               .includes(this.searchValuePhone.toString())
+            :false
           )
         )
       )
     );
   }
+
+  searchEmail(): void {
+    this.visibleEmail = false;
+    this.user$ = this.user$.pipe(
+      switchMap((item) =>
+        of(
+          item.filter((elem) =>
+            elem.email ?
+            elem.email
+              .toLowerCase()
+              .includes(this.searchValueEmail.toLowerCase())
+            : false
+          )
+        )
+      )
+    );
+  }
+
 
   open(id:string): void {
     this.drawerService.create<UserDetailComponent, { id: string }, string>({

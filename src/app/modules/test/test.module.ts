@@ -6,7 +6,6 @@ import { TestInfoComponent } from './components/test-info/test-info.component';
 import { TestAnswerDetailComponent } from './components/test-answer-detail/test-answer-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { canActivatePermission } from 'src/app/shared/guards/permission-guard';
-import { TaleDetailComponent } from '../tale/components/tale-detail/tale-detail.component';
 import { BaseModule } from 'src/app/shared/modules';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzTagModule } from 'ng-zorro-antd/tag';
@@ -24,7 +23,7 @@ const router: Routes =  [
   },
   {
     path: 'update/:id',
-    component: TaleDetailComponent,
+    component: TestDetailComponent,
     canActivate: [canActivatePermission],
     data: { permissions: ['data_update'] }
   }
