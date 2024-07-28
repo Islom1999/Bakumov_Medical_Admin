@@ -1,6 +1,6 @@
 import { Gender, RoleType } from "src/enumerations";
 import { ServiceType } from "src/enumerations/serviceType";
-import { IOrder, IPayment } from "./order";
+import { IOrder, IPayment, ITransactionV2 } from "./order";
 
 export interface IUser{
     id?: string;
@@ -20,6 +20,7 @@ export interface IUser{
     children?: IChildren[];
     order: IOrder[];
     paymentList: IPayment[]
+    transactions: ITransactionV2[]
 }   
 
 

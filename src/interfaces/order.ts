@@ -50,8 +50,8 @@ export interface IOrderV2{
     premiumId: string;
     promoId: string;
 
-    created_at: Date;
-    updated_at: Date;
+    createdAt: Date;
+    updatedAt: Date;
 
     user: IUser;
     premium: IPremium;

@@ -75,26 +75,26 @@
 </nz-table>
 
 
-<h2>O'tkazma ma'lumotlari</h2>
-<nz-table [nzData]="[user?.paymentList]" [nzFrontPagination]="false" [nzShowPagination]="false">
+<h2>To'lov ma'lumotlari</h2>
+<nz-table [nzData]="[user?.transactions || []]" [nzFrontPagination]="false" nz-responsive [nzShowPagination]="false">
     <thead>
         <tr>
-            <th>No</th>
-            <th>Transaction Id</th>
+            <th>To'lov kodi</th>
             <th>Turi</th>
             <th>Narxi</th>
-            <th>Yaratilgan vaqti</th>
-            <th>O'zgartirilgan vaqti</th>
+            <th>Status</th>
+            <th>To'langan sana</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let payment of user?.paymentList || []; index as i">
-            <td>{{i+1}}</td>
-            <td>{{payment.transaction?.tid || 'null'}}</td>
-            <td>{{payment.system || 'null'}}</td>
-            <td>{{payment.amount || 'null'}}</td>
-            <td>{{payment.createdAt | date : 'dd.MM.YYYY'}}</td>
-            <td>{{payment.updatedAt | date : 'dd.MM.YYYY'}}</td>
+        <tr *ngFor="let data of (user?.transactions || []); index as i">
+            <td>{{ data.trans_id }}</td>
+            <td>{{ data.provider }}</td>
+            <td>{{ data.amount / 100 }}</td>
+            <td>
+                <nz-tag [nzColor]="data.status == 'PAID' ? '#87d068': '#f50'">{{ data.status }}</nz-tag>
+            </td>
+            <td>{{ data.perform_time ? (data.perform_time | date) : '-----' }}</td>
         </tr>
     </tbody>
 </nz-table>

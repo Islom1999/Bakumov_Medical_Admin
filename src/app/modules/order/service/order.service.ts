@@ -23,3 +23,12 @@ export class OrderServiceV2 extends BaseApiService<IOrderV2> {
     super(_http, `${environment.apiUrl}/order/v2`)
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
+export class OrderServicePending extends BaseApiService<IOrderV2> {
+  constructor(private _http: HttpClient) {
+    super(_http, `${environment.apiUrl}/order/pending`)
+  }
+}

@@ -11,6 +11,7 @@ import { OrderListV2Component } from './components/order-list-v2/order-list-v2.c
 import { OrderDetailV2Component } from './components/order-detail-v2/order-detail-v2.component';
 import { OrderRootComponent } from './components/order-root/order-root.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { OrderListPendingComponent } from './components/order-list-pending/order-list-pending.component';
 
 
 const router: Routes = [
@@ -27,6 +28,10 @@ const router: Routes = [
     component: OrderListComponent
   },
   {
+    path: 'pending',
+    component: OrderListPendingComponent
+  },
+  {
     path: 'v2/view',
     component: OrderDetailV2Component
   },
@@ -38,7 +43,8 @@ const router: Routes = [
     OrderDetailComponent,
     OrderListV2Component,
     OrderDetailV2Component,
-    OrderRootComponent
+    OrderRootComponent,
+    OrderListPendingComponent
   ],
   imports: [
     CommonModule,
