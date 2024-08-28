@@ -32,7 +32,7 @@ export class PremiumDetailComponent {
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      month: new FormControl(PremiumMonth.month_0, [Validators.required]),
+      day: new FormControl(1, [Validators.required]),
       isActive: new FormControl(false, [Validators.required]),
       price: new FormControl(1000, [Validators.required, Validators.min(1000)]),
     });

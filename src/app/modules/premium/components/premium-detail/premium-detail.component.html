@@ -17,9 +17,7 @@
             <nz-form-item>
                 <nz-form-label [nzSpan]="7" nzRequired>Premium turi</nz-form-label>
                 <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your permision!">
-                    <nz-select formControlName="month" placeholder="month">
-                        <nz-option [nzValue]="item" [nzLabel]="item" *ngFor="let item of premuimType"></nz-option>
-                    </nz-select>
+                    <input type="number" nz-input placeholder="kun" formControlName="day" />
                 </nz-form-control>
             </nz-form-item>
 

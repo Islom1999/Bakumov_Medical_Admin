@@ -4,6 +4,6 @@ export interface IPremium{
     id?: string;
     name:string;
     price: number,
-    month: PremiumMonth,
+    day: number,
     isActive: boolean,
 }

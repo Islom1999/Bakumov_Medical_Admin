@@ -3,10 +3,10 @@
         <h2>Premium ro'yhati</h2>
     </div>
     <div class="right">
-        <!-- <a *ngxPermissionsOnly="['admin_create']" nz-button [routerLink]="['add']" nzType="primary" nzSearch
+        <a *ngxPermissionsOnly="['admin_create']" nz-button [routerLink]="['add']" nzType="primary" nzSearch
             nzSize="large">
             <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
-        </a> -->
+        </a>
     </div>
 </div>
 
@@ -35,7 +35,7 @@
             <tr *ngFor="let data of basicTable.data; index as i">
                 <td>{{ i+1 }}</td>
                 <td>{{ data.name }}</td>
-                <td>{{ data.month}}</td>
+                <td>{{ data.day}} kun</td>
                 <td>{{ data.price}}</td>
                 <td>{{ data.isActive ? "actice":"noactive"}}</td>
                 <td>
