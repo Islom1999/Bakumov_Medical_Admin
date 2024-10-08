@@ -1,0 +1,33 @@
+<div class="content-container">
+    <nz-spin class="nz-spin" [nzSpinning]="loading">
+        <h2 class="form-title">{{"Sozlamalarni o'gartirish"}}</h2>
+
+        <form nz-form [formGroup]="form" (submit)="submit()">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Google</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
+                    <nz-select nzPlaceHolder="Please select" formControlName="is_google">
+                        <nz-option [nzLabel]="'ishlasin'" [nzValue]="true"></nz-option>
+                        <nz-option [nzLabel]="'ishlamasin'" [nzValue]="false"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzRequired>Yordamchi turi</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input">
+                    <nz-select nzPlaceHolder="Please select" formControlName="is_otp">
+                        <nz-option *ngFor="let item of otpType" [nzLabel]="item"
+                            [nzValue]="item"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                    <button nz-button nzType="primary">{{"O\'zgartirish"}}</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </nz-spin>
+</div>

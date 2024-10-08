@@ -12,3 +12,19 @@ export interface IAdmin{
     role?: IRole
     promo_code?: IPromoCode[]
 }   
+
+export enum SettingStatus{
+    all = 'all',
+    old_user = 'old_user',
+    premium = 'premium',
+    none = 'none',
+}
+
+export interface ISettings{
+    id?: string
+    is_otp: SettingStatus
+    is_google: boolean
+    is_payme: boolean
+    is_click: boolean
+    is_service: boolean
+}   

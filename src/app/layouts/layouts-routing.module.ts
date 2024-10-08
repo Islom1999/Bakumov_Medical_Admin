@@ -143,6 +143,12 @@ const routes: Routes = [
         canActivate: [canActivatePermission],
         data: { permissions: ['profile_view'] }
       },
+      {
+        path: 'settings',
+        loadChildren: () => import('../modules/index').then((modules) => modules.SettingsModule),
+        canActivate: [canActivatePermission],
+        data: { permissions: ['data_view'] }
+      },
     ],
   },
   {
